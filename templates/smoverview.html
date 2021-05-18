@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Smart meter model defination</title>
+</head>
+<body>
+        <label for="brand"></label>
+            <select id="brand" name="brand">
+              {% for l in brd %}
+              <option value="{{l}}">{{l}}</option>
+              {% endfor %}
+            </select>
+        <label for="area"></label>
+            <select id="area" name="area">
+              {% for l in area %}
+              <option value="{{l}}">{{l}}</option>
+              {% endfor %}
+            </select>
+        <table>
+            		<tr>
+                	<th>Sr. No.</th>
+                	<th>Name</th>
+                	<th>Location</th>
+                	<th>Area</th>
+                	<th>Brand</th>
+                    <th>Model</th>
+                	<th>Description</th>
+           		</tr>
+                {% for r in data %}
+                <tr>
+                    <td>{{ r.nm }}</td>
+                    <td>{{r.location}}</td>
+                    <td>{{r.area}}</td>
+                </tr>
+                {% endfor %}
+</body>
+</html>

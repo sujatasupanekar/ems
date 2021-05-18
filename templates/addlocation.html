@@ -1,0 +1,17 @@
+{% extends 'main_content.html' %}
+{% load static %}
+
+{% block main_content_header %}
+    Enter Company Details
+{% endblock %}
+
+{% block main_content %}
+    <form class="main-content-form" action="addlocation" method="POST">
+        {% csrf_token %}
+        <table>
+            {{ form }}
+        </table>
+
+        <button type="submit" class="btn btn-primary ems-button">Add New Location</button>
+    </form>
+{% endblock %}

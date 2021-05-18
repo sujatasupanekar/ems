@@ -1,0 +1,38 @@
+
+{% extends 'main_content.html' %}
+{% load static %}
+
+{% block main_content_header %}
+    Company Details
+{% endblock %}
+
+{% block main_content %}
+    <form class="main-content-form">
+        {% csrf_token %}
+          <table class="table table-striped">
+            <thead>
+            <tr>
+            <th>ID</th>
+            <th>Company</th>
+            <th>Location</th>
+            <th>Area</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for i in cd %}
+              <tr>
+                <td>{{i.id}}</td>
+                <td>{{i.company}}</td>
+                <td>{{i.location}}</td>
+                <td>{{i.area}}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <a href="cmp" class="btn btn-primary ems-button">Add New Record</a>
+    </form>
+{% endblock %}
+
+
+
+
