@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'ems.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME' : 'EMSDatabase',
+        'NAME' : 'ems_data',
         'USER': 'ems_user',
         'PASSWORD': 'admin_123',
         'HOST': 'localhost',
