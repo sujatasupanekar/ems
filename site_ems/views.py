@@ -14,7 +14,7 @@ from django.contrib import messages
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.forms import PasswordResetForm
 from django.contrib.auth.models import User
-from .models import Company,Location,Consortium
+from .models import Company,Location,Consortium,Area
 from .forms import CompanyForm,LocationForm,AreaForm
 
 
@@ -58,7 +58,7 @@ def adminpage(request):
 def userpage(request):
     return render(request, 'userpage.html')
 
-def cmp(request):
+def addcompany(request):
     #full_list = get_consortium()
     #print(full_list)
     if request.method == "POST":
@@ -74,6 +74,36 @@ def cmp(request):
         print("in else part")
         form = CompanyForm()
     return render(request,'addcompany.html',{'form':form})
+
+def showcompany(request):
+    cd = Company.objects.all()
+    for i in cd:
+        instance = i.createddate
+        print(instance)
+    return render(request, "showcompany.html", {'cd': cd})
+
+def editcompany(request, id):
+    employee = Company.objects.get(company_id=id)
+    updated_on = employee.modifieddate
+    return render(request,'editcompany.html', {'employee':employee,'updated_on':updated_on})
+
+def updatecompany(request, id):
+    form = CompanyForm()
+    if request.method == 'POST':
+        employee = Company.objects.get(company_id=id)
+        form = CompanyForm(request.POST, instance=employee)
+        if form.is_valid():
+            form.save()
+            print("in update inside loop:", employee)
+            return redirect("/showcompany")
+    return render(request, 'editcompany.html', {'employee': employee})
+
+def destroycompany(request, id):
+    print("company id",id)
+    employee = Company.objects.get(company_id=id)
+    employee.delete()
+    return redirect("/showcompany")
+
 
 def get_consortium():
     temp = Consortium.objects.all()
@@ -115,11 +145,42 @@ def getlocation():
     print(type(result))
     return result
 
+def getcompany():
+    obj = Company.objects.all()
+    ls = []
+    for i in obj:
+        nm = i.company_name1
+        ls.append(nm)
+    print(ls)
+    return ls
+
 def showlocation(request):
-    result = getlocation()
+    result = Location.objects.all()
     return render(request,'showlocation.html',{'result':result})
 
+def editlocation(request, id):
+    obj = Location.objects.get(location_id=id)
+    updated_on = obj.modifieddate
+    return render(request,'edit.html', {'employee':obj,'updated_on':updated_on})
+
+def updatelocation(request, id):
+    form = LocationForm()
+    if request.method == 'POST':
+        obj =  Location.objects.get(location_id=id)
+        form = LocationForm(request.POST, instance=obj)
+        if form.is_valid():
+            form.save()
+            return redirect("/showlocation")
+    return render(request, 'editlocation.html', {'employee': obj})
+
+def destroylocation(request, id):
+    #print("company id",id)
+    obj = Location.objects.get(location_id=id)
+    obj.delete()
+    return redirect("/showlocation")
+
 def addarea(request):
+    full_list = getcompany()
     if request.method == "POST":
         form = AreaForm(request.POST)
         if form.is_valid():
@@ -131,48 +192,36 @@ def addarea(request):
         form = AreaForm()
     return render(request, 'addarea.html', {'form': form})
 
-
 def showarea(request):
-    return render(request, 'showarea.html')
+    result = Area.objects.all()
+    return render(request, 'showarea.html',{'result':result})
+
+def editarea(request, id):
+    obj = Area.objects.get(id=id)
+    updated_on = obj.modifieddate
+    return render(request,'editarea.html', {'employee':obj,'updated_on':updated_on})
+
+def updatearea(request, id):
+    form = AreaForm()
+    if request.method == 'POST':
+        obj =  Area.objects.get(id=id)
+        form = AreaForm(request.POST, instance=obj)
+        if form.is_valid():
+            form.save()
+            return redirect("/showarea")
+    return render(request, 'editarea.html', {'employee': obj})
+
+def destroyarea(request, id):
+    #print("company id",id)
+    obj = Area.objects.get(id=id)
+    obj.delete()
+    return redirect("/showarea")
+
+
 
 def roicalc(request):
     return render(request,'roicalc.html')
 
-def showcompany(request):
-    print("in show")
-
-    cd = Company.objects.all()
-    for i in cd:
-        instance = i.createddate
-        print(instance)
-    return render(request, "showcompany.html", {'cd': cd})
-
-def edit(request, id):
-    employee = Company.objects.get(company_id=id)
-    updated_on = employee.modifieddate
-    return render(request,'edit.html', {'employee':employee,'updated_on':updated_on})
-
-def update(request, id):
-    form = CompanyForm()
-    if request.method == 'POST':
-        employee = Company.objects.get(company_id=id)
-        form = CompanyForm(request.POST, instance=employee)
-        print("in update before loop:", employee, id)
-        print(employee.company_name1)
-        print(form.is_valid())
-        print(form.errors)
-        if form.is_valid():
-            form.save()
-            print("in update inside loop:", employee)
-            return redirect("/showcompany")
-    return render(request, 'edit.html', {'employee': employee})
-
-
-def destroy(request, id):
-    print("company id",id)
-    employee = Company.objects.get(company_id=id)
-    employee.delete()
-    return redirect("/showcompany")
 
 def error_404(request,exception):
     values_for_template = {}

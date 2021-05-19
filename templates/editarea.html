@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
 </head>
 <body>
-<form method="POST" class="post-form" action="/update/{{employee.company_id}}">
+<form method="POST" class="post-form" action="/updatearea/{{employee.id}}">
         {% csrf_token %}
 
     {{ form.errors }}

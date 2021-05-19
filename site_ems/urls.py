@@ -16,20 +16,25 @@ urlpatterns = [
     url(r'^logout/$', views.logout, name='logout'),
     url(r'^adminpage$', views.adminpage, name='adminpage'),
     url(r'^userpage$', views.userpage, name='userpage'),
-    url(r'^cmp1$', views.cmp, name='cmp1'),
 
     ### URL for company
-    path('addcompany',views.cmp,name="addcompany"),
+    path('addcompany',views.addcompany,name="addcompany"),
     path('showcompany', views.showcompany),
-    path('edit/<int:id>', views.edit),
-    path('update/<int:id>', views.update),
-    path('delete/<int:id>', views.destroy),
+    path('editcompany/<int:id>', views.editcompany),
+    path('updatecompany/<int:id>', views.updatecompany),
+    path('deletecompany/<int:id>', views.destroycompany),
     ### URL for location
     path('addlocation',views.addlocation),
     path('showlocation',views.showlocation),
+    path('editlocation/<int:id>', views.editlocation),
+    path('updatelocation/<int:id>', views.updatelocation),
+    path('deletelocation/<int:id>', views.destroylocation),
     ### URL for location
     path('addarea', views.addarea),
     path('showarea', views.showarea),
+    path('editarea/<int:id>', views.editarea),
+    path('updatearea/<int:id>', views.updatearea),
+    path('deletearea/<int:id>', views.destroyarea),
     path('roicalc',views.roicalc),
                   ### for smart meter
     #url(r'smoverview$',views.smoverview,name='smoverview'),

@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block main_content_header %}
-    Company Details
+    Area Details
 {% endblock %}
 
 {% block main_content %}
@@ -19,7 +19,7 @@
             </tr>
             </thead>
             <tbody>
-            {% for i in cd %}
+            {% for i in result %}
               <tr>
                 <td>{{i.id}}</td>
                 <td>{{i.company}}</td>
@@ -27,6 +27,10 @@
                 <td>{{i.area}}</td>
               </tr>
             {% endfor %}
+            <td>
+                    <a href="/edit/{{ i.id }}"><span class="glyphicon glyphicon-pencil" >Update</span></a>
+                    <a href="/delete/{{ i.id }}">Delete</a>
+                </td>
           </tbody>
         </table>
         <a href="cmp" class="btn btn-primary ems-button">Add New Record</a>

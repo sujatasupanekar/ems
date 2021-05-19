@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block main_content_header %}
-    Company Details
+    Location Details
 {% endblock %}
 
 {% block main_content %}
@@ -26,8 +26,8 @@
                     <td>{{j}}</td>
                   {% endfor %}
                    <td>
-                    <a href="/edit/{{ j }}"><span class="glyphicon glyphicon-pencil" >Update</span></a>
-                    <a href="/delete/{{ j }}">Delete</a>
+                    <a href="/edit/{{ i.location_id }}"><span class="glyphicon glyphicon-pencil" >Update</span></a>
+                    <a href="/delete/{{ i.location_id }}">Delete</a>
                 </td>
               </tr>
 

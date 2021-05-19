@@ -86,7 +86,7 @@ class Location(models.Model):
     #contentright = models.CharField(max_length=1, blank=True, null=True)
 
 class Area(models.Model):
-    company = models.ForeignKey(Company, models.DO_NOTHING, blank=True, null=True)
+    company = models.ForeignKey(Company, on_delete=models.SET_NULL ,null=True)
     location = models.CharField(max_length=50)
     area = models.CharField(max_length=50)
     area_logo = models.CharField(max_length=100)

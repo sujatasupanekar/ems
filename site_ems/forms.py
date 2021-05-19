@@ -13,6 +13,8 @@ class CompanyForm(forms.ModelForm):
         }
 
 class LocationForm(forms.ModelForm):
+    company = forms.ModelChoiceField(queryset=Company.objects.values_list('company_name1',flat=True),initial=0)
+
     class Meta:
         model = Location
         fields = ['company','short_name','description','street','town','zip_code','country','contact_person',
@@ -22,11 +24,10 @@ class LocationForm(forms.ModelForm):
             'country': forms.TextInput(attrs={'class': 'form-control'})
         }
 
+
 class AreaForm(forms.ModelForm):
+    company = forms.ModelChoiceField(queryset=Company.objects.values_list('company_name1',flat=True),initial=0)
+    location = forms.ModelChoiceField(queryset=Location.objects.values_list('short_name',flat=True),initial=0)
     class Meta:
         model = Area
-        fields = ['company','location','area','area_logo']
-
-        widget = {
-            'country': forms.TextInput(attrs={'class': 'form-control'})
-        }
+        fields =['company','location','area','area_logo']
