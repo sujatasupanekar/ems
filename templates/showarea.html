@@ -16,6 +16,7 @@
             <th>Company</th>
             <th>Location</th>
             <th>Area</th>
+            <th>Area logo</th>
             </tr>
             </thead>
             <tbody>
@@ -25,15 +26,17 @@
                 <td>{{i.company}}</td>
                 <td>{{i.location}}</td>
                 <td>{{i.area}}</td>
+                <td>{{i.area_logo}}</td>
+                <td>
+                    <a href="/editarea/{{ i.id }}"><span class="glyphicon glyphicon-pencil" >Update</span></a>
+                    <a href="/deletearea/{{ i.id }}">Delete</a>
+                </td>
               </tr>
             {% endfor %}
-            <td>
-                    <a href="/edit/{{ i.id }}"><span class="glyphicon glyphicon-pencil" >Update</span></a>
-                    <a href="/delete/{{ i.id }}">Delete</a>
-                </td>
+
           </tbody>
         </table>
-        <a href="cmp" class="btn btn-primary ems-button">Add New Record</a>
+
     </form>
 {% endblock %}
 
