@@ -1,0 +1,7 @@
+migrations
+.DS_Store
+./ems/__pycache__
+__pycache__/settings.cpython-39.pyc
+.site_ems/__pycache__/forms.cpython-39.pyc
+.site_ems/__pycache__/models.cpython-39.pyc
+
