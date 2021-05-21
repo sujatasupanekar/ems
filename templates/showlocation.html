@@ -12,7 +12,7 @@
           <table class="table table-striped">
             <thead>
             <tr>
-            <th>ID</th>
+            <th hidden>ID</th>
             <th>Short name</th>
             <th>Description</th>
             <th>Street</th>
@@ -22,12 +22,14 @@
             <tbody>
             {% for i in result %}
               <tr>
-                  {% for j in i %}
+                {% for j in i %}
+                  {% if not forloop.first %}          
                     <td>{{j}}</td>
-                  {% endfor %}
-                   <td>
-                    <a href="/edit/{{ i.location_id }}"><span class="glyphicon glyphicon-pencil" >Update</span></a>
-                    <a href="/delete/{{ i.location_id }}">Delete</a>
+                  {% endif %}
+                {% endfor %}
+                <td>
+                  <a href="/edit/{{ i.location_id }}"><span class="glyphicon glyphicon-pencil" >Update</span></a>
+                  <a href="/delete/{{ i.location_id }}">Delete</a>
                 </td>
               </tr>
 
