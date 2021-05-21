@@ -16,9 +16,9 @@ class EMSSidebar extends HTMLElement {
                 </button>
                 </h2>
                 <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                    <div class="accordion-body"><div><a href="/cmp" class="opt-a"><span class="panel-dropdown-text">Company</span></a></div></div>
-                    <div class="accordion-body"><div><a href="/location" class="opt-a"><span class="panel-dropdown-text">Location</span></a></div></div>
-                    <div class="accordion-body"><div><a href="/area" class="opt-a"><span class="panel-dropdown-text">Area</span></a></div></div>
+                    <div class="accordion-body"><div><a href="/addcompany" class="opt-a"><span class="panel-dropdown-text">Company</span></a></div></div>
+                    <div class="accordion-body"><div><a href="/addlocation" class="opt-a"><span class="panel-dropdown-text">Location</span></a></div></div>
+                    <div class="accordion-body"><div><a href="/addarea" class="opt-a"><span class="panel-dropdown-text">Area</span></a></div></div>
                     <div class="accordion-body"><div><a href="/virtualchannel" class="opt-a"><span class="panel-dropdown-text">Virtual Channel</span></a></div></div>
                     <div class="accordion-body"><div><a href="/emanage" class="opt-a"><span class="panel-dropdown-text">Eamange</span></a></div></div>
                     <div class="accordion-body"><div><a href="/roicalc" class="opt-a"><span class="panel-dropdown-text">ROI Calculator</span></a></div></div>
