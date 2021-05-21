@@ -184,7 +184,10 @@ def addarea(request):
     if request.method == "POST":
         form = AreaForm(request.POST)
         if form.is_valid():
-            form.save()
+            Area = form.save(commit=False)
+            Area.createdby = request.user
+            Area.modifiedby = request.user
+            Area = Area.save()
             print(" form is valid and in try block")
             return redirect('/showarea')
     else:
@@ -196,6 +199,12 @@ def showarea(request):
     result = Area.objects.all()
     return render(request, 'showarea.html',{'result':result})
 
+def load_location(request):
+    company_id = request.GET.get('company_id')
+    locations = Company.objects.filter(company_id=company_id).all()
+    return render(request, 'location_dropdown.html', {'locations': locations})
+    # return JsonResponse(list(cities.values('id', 'name')), safe=False)
+
 def editarea(request, id):
     obj = Area.objects.get(id=id)
     updated_on = obj.modifieddate
@@ -204,7 +213,7 @@ def editarea(request, id):
 def updatearea(request, id):
     form = AreaForm()
     if request.method == 'POST':
-        obj =  Area.objects.get(id=id)
+        obj = Area.objects.get(id=id)
         form = AreaForm(request.POST, instance=obj)
         if form.is_valid():
             form.save()

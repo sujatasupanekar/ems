@@ -6,7 +6,8 @@
 {% endblock %}
 
 {% block main_content %}
-    <form class="main-content-form" action="addarea" method="POST">
+    <form class="main-content-form" action="addarea" method="POST" id="areaForm"
+          data-cities-url="{% url 'load_location' %}" novalidate>
         {% csrf_token %}
         <table>
             {{form}}
@@ -15,4 +16,33 @@
         <button type="submit" class="btn btn-primary ems-button">Add New Area</button>
     </form>
 {% endblock %}
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+    $("#id_country").change(function () {
+        const url = $("#areaForm").attr("data-cities-url");  // get the url of the `load_cities` view
+        const companyId = $(this).val();  // get the selected country ID from the HTML input
+
+        $.ajax({                       // initialize an AJAX request
+            url: url,                    // set the url of the request (= /persons/ajax/load-cities/ )
+            data: {
+                'company_id': companyId       // add the country id to the GET parameters
+            },
+            success: function (data) {   // `data` is the return of the `load_cities` view function
+                $("#id_city").html(data);  // replace the contents of the city input with the data that came from the server
+                /*
+
+                let html_data = '<option value="">---------</option>';
+                data.forEach(function (city) {
+                    html_data += `<option value="${city.id}">${city.short_name}</option>`
+                });
+                console.log(html_data);
+                $("#id_city").html(html_data);
+
+                */
+            }
+        });
+
+    });
+</script>
 

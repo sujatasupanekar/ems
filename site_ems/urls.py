@@ -35,6 +35,7 @@ urlpatterns = [
     path('editarea/<int:id>', views.editarea),
     path('updatearea/<int:id>', views.updatearea),
     path('deletearea/<int:id>', views.destroyarea),
+    path('load-location/', views.load_location, name='load_location'), # AJAX
     path('roicalc',views.roicalc),
                   ### for smart meter
     #url(r'smoverview$',views.smoverview,name='smoverview'),

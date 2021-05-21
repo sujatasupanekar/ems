@@ -25,6 +25,8 @@ class Company(models.Model):
     tax_no1 = models.CharField(max_length=40)
     tax_no2 = models.CharField(max_length=40)
 
+    def __str__(self):
+        return self.company_name1
 
 class Consortium(models.Model):
     consortium_id = models.AutoField(primary_key=True)
@@ -51,7 +53,7 @@ class Consortium(models.Model):
     tax_no2 = models.CharField(max_length=40)
 
 class Location(models.Model):
-    company = models.ForeignKey(Company, models.DO_NOTHING, blank=True, null=True)
+    company = models.ForeignKey(Company, on_delete=models.CASCADE, blank=True, null=True)
     location_id = models.AutoField(primary_key=True)
     short_name = models.CharField(max_length=15, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
@@ -85,8 +87,15 @@ class Location(models.Model):
     location_logo = models.IntegerField(blank=True, null=True)
     #contentright = models.CharField(max_length=1, blank=True, null=True)
 
+    def __str__(self):
+        return self.short_name
+
 class Area(models.Model):
     company = models.ForeignKey(Company, on_delete=models.SET_NULL ,null=True)
-    location = models.CharField(max_length=50)
+    location = models.ForeignKey(Location,on_delete=models.SET_NULL,null= True)
     area = models.CharField(max_length=50)
     area_logo = models.CharField(max_length=100)
+    createdby = models.CharField(max_length=50, default=None)
+    createddate = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+    modifiedby = models.CharField(max_length=50, default=None)
+    modifieddate = models.DateTimeField(auto_now=True, null=True, blank=True)

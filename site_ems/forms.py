@@ -13,7 +13,7 @@ class CompanyForm(forms.ModelForm):
         }
 
 class LocationForm(forms.ModelForm):
-    company = forms.ModelChoiceField(queryset=Company.objects.values_list('company_name1',flat=True),initial=0)
+    company = forms.ModelChoiceField(queryset=Company.objects.all(),initial=0)
 
     class Meta:
         model = Location
@@ -26,8 +26,13 @@ class LocationForm(forms.ModelForm):
 
 
 class AreaForm(forms.ModelForm):
-    company = forms.ModelChoiceField(queryset=Company.objects.values_list('company_name1',flat=True),initial=0)
-    location = forms.ModelChoiceField(queryset=Location.objects.values_list('short_name',flat=True),initial=0)
+    company = forms.ModelChoiceField(queryset=Company.objects.all(),initial=0)
+    location = forms.ModelChoiceField(queryset=Location.objects.all(),initial=0)
+
     class Meta:
         model = Area
         fields =['company','location','area','area_logo']
+
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, **kwargs)
+            #self.fields['company'].queryset = Company.objects.none()
