@@ -12,7 +12,7 @@
           <table class="table table-striped ems-table">
             <thead>
             <tr>
-            <th hidden>ID</th>
+            <th>ID</th>
             <th>Short name</th>
             <th>Description</th>
             <th>Street</th>
@@ -22,7 +22,7 @@
             </thead>
             <tbody>
             {% for i in result %}
-              <tr>
+            <!--  <tr>
                 {% for j in i %}
                   {% if not forloop.first %}          
                     <td>{{j}}</td>
@@ -32,12 +32,22 @@
                   <a href="/edit/{{ i.location_id }}"><span class="glyphicon glyphicon-pencil" >Update</span></a>
                   <a href="/delete/{{ i.location_id }}">Delete</a>
                 </td>
-              </tr>
-
+              </tr>  -->
+            <tr>
+              <td>{{ i.location_id}}</td>
+              <td>{{ i.short_name}}</td>
+              <td>{{ i.description}}</td>
+              <td>{{ i.street}}</td>
+              <td>{{ i.contact_person}}</td>
+              <td>
+                  <a href="/editlocation/{{ i.location_id }}"><span class="glyphicon glyphicon-pencil" >Update</span></a>
+                  <a href="/deletelocation/{{ i.location_id }}">Delete</a>
+              </td>
+            </tr>
             {% endfor %}
           </tbody>
         </table>
-        <a href="cmp" class="btn btn-primary ems-button">Add New Record</a>
+        <a href="addlocation" class="btn btn-primary ems-button">Add New Record</a>
     </form>
 {% endblock %}
 

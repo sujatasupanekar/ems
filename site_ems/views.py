@@ -121,10 +121,12 @@ def addlocation(request):
         form = LocationForm(request.POST)
         if form.is_valid():
                 Location = form.save(commit=False)
+                Location.createdby = request.user
+                Location.modifiedby = request.user
                 Location = Location.save()
                 print(" form is valid and in try block")
-                result = getlocation()
-                return render(request,'showlocation.html',{'result': result})
+                #result = getlocation()
+                return render(request,'showlocation.html')
     else:
         print("in else part")
         form = LocationForm()
@@ -207,17 +209,23 @@ def load_location(request):
 
 def editarea(request, id):
     obj = Area.objects.get(id=id)
+    print("obj:", obj)
+    form = AreaForm(request.POST, instance=obj)
     updated_on = obj.modifieddate
-    return render(request,'editarea.html', {'employee':obj,'updated_on':updated_on})
+    return render(request,'editarea.html', {'form':form,'employee':obj,'updated_on':updated_on})
 
 def updatearea(request, id):
     form = AreaForm()
     if request.method == 'POST':
         obj = Area.objects.get(id=id)
+        print("obj:",obj)
         form = AreaForm(request.POST, instance=obj)
         if form.is_valid():
             form.save()
+            print("in if form valid loop")
             return redirect("/showarea")
+        else:
+            print(form.errors)
     return render(request, 'editarea.html', {'employee': obj})
 
 def destroyarea(request, id):

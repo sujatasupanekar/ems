@@ -32,7 +32,3 @@ class AreaForm(forms.ModelForm):
     class Meta:
         model = Area
         fields =['company','location','area','area_logo']
-
-        def __init__(self, *args, **kwargs):
-            super().__init__(*args, **kwargs)
-            #self.fields['company'].queryset = Company.objects.none()
