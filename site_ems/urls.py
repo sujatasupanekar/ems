@@ -38,7 +38,12 @@ urlpatterns = [
     path('load-location/', views.load_location, name='load_location'), # AJAX
     path('roicalc',views.roicalc),
                   ### for smart meter
-    #url(r'smoverview$',views.smoverview,name='smoverview'),
+    url(r'addsmartmeter$',views.addsmartmeter,name='addsmartmeter'),
+    url(r'showsmartmeter$',views.showsmartmeter,name='showsmartmeter'),
+    url(r'smartmeterport',views.smartmeterport,name='smartmeterport'),
+                ### for brand and manufacturer
+    url(r'brandandmanuf$', views.brandandmanuf, name='brandandmanuf'),
+    url(r'showbrandandmanuf$', views.showbrandandmanuf, name='showbrandandmanuf'),
 
     path(r'password_reset/done/', auth_views.PasswordResetDoneView.as_view(template_name='Forgot_password/password_reset_done.html'), name='password_reset_done'),
     path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name="Forgot_password/password_reset_confirm.html"), name='password_reset_confirm'),

@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block main_content_header %}
-    Area Details
+    Smart Meter Details
 {% endblock %}
 
 {% block main_content %}
@@ -13,24 +13,27 @@
             <thead>
             <tr>
             <th>ID</th>
-            <th>Company</th>
-            <th>Location</th>
-            <th>Area</th>
-            <th>Area logo</th>
+            <th>Brand name</th>
+            <th>Brand type</th>
+            <th>Brand model</th>
+            <th>Manufacturer</th>
+            <th>Description</th>
+            <th>Max no of channels</th>
             </tr>
             </thead>
             <tbody>
             {% for i in result %}
               <tr>
-                <td>{{i.area_id}}</td>
-                <td>{{i.company}}</td>
-                <td>{{i.location}}</td>
-                <td>{{i.area}}</td>
-                <td>{{i.area_logo}}</td>
-                <td>
+                <td>{{i.brand_id}}</td>
+                <td>{{i.brand_name}}</td>
+                <td>{{i.brand_type}}</td>
+                <td>{{i.brand_model}}</td>
+                <td>{{i.description}}</td>
+                <td>{{i.max_no_of_channels}}</td>
+                <!--<td>
                     <a href="/editarea/{{ i.area_id }}"><span class="glyphicon glyphicon-pencil" >Update</span></a>
                     <a href="/deletearea/{{ i.area_id }}">Delete</a>
-                </td>
+                </td>-->
               </tr>
             {% endfor %}
 

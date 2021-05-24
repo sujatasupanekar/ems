@@ -70,7 +70,7 @@ class EMSSidebar extends HTMLElement {
                 </button>
               </h2>
               <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#accordionExample">
-                    <div class="accordion-body"><div><a href="/cmp" class="opt-a"><span class="panel-dropdown-text">In Progress</span></a></div></div>
+                    <div class="accordion-body"><div><a href="/addsmartmeter" class="opt-a"><span class="panel-dropdown-text">In Progress</span></a></div></div>
               </div>
             </div>
 

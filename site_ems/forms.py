@@ -1,5 +1,5 @@
 from django import forms
-from .models import Company,Location,Area
+from .models import Company,Location,Area,Smartmeter,SmartmeterPort,Brand_and_Manufacturer
 
 class CompanyForm(forms.ModelForm):
     class Meta:
@@ -32,3 +32,25 @@ class AreaForm(forms.ModelForm):
     class Meta:
         model = Area
         fields =['company','location','area','area_logo']
+
+class SmartmeterForm(forms.ModelForm):
+    company = forms.ModelChoiceField(queryset=Company.objects.all(), initial=0)
+    location = forms.ModelChoiceField(queryset=Location.objects.all(), initial=0)
+
+    class Meta:
+        model = Smartmeter
+        fields = ['brand_id','description','max_no_of_channels']
+
+class SmartmeterPortForm(forms.ModelForm):
+    #port_type_choices = [('RS232','RS232'),('RS485','RS485'),('Network','Network')]
+    #communication_type_choices = [('serial', 'Serial'), ('tcp/ip', 'TCP/IP')]
+
+    class Meta:
+        model = SmartmeterPort
+        fields = ['port_type','communication_type','reading_type','baud_rate','data_bits','parity',
+                  'stop_bits','flow_control']
+
+class BrandandManufacturerForm(forms.ModelForm):
+    class Meta:
+        model = Brand_and_Manufacturer
+        fields = ['brand_name','brand_model','brand_type','manufacturer','description','max_no_of_channels']

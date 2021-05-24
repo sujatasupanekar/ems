@@ -14,14 +14,74 @@ from django.contrib import messages
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.forms import PasswordResetForm
 from django.contrib.auth.models import User
-from .models import Company,Location,Consortium,Area
-from .forms import CompanyForm,LocationForm,AreaForm
-
+from .models import Company,Location,Consortium,Area,Smartmeter,SmartmeterPort,Brand_and_Manufacturer
+from .forms import CompanyForm,LocationForm,AreaForm,SmartmeterForm,SmartmeterPortForm,BrandandManufacturerForm
 
 # Create your views here.
 def index(request):
     print("in index ")
     return HttpResponse('Hello, welcome to the index page.')
+
+def addsmartmeter(request):
+    if request.method == "POST":
+        form = SmartmeterForm(request.POST)
+        if form.is_valid():
+                Smartmeter = form.save(commit=False)
+                Smartmeter.createdby = request.user
+                Smartmeter.modifiedby = request.user
+                Smartmeter = Smartmeter.save()
+                print(" form is valid and in try block")
+                return redirect('/showsmartmeter')
+    else:
+        print("in else part")
+        form = SmartmeterForm()
+    return render(request,'addsmartmeter.html',{'form':form})
+
+def showsmartmeter(request):
+    result = Smartmeter.objects.all()
+    return render(request, 'showsmartmeter.html', {'result': result})
+
+def smartmeterport(request):
+    form = SmartmeterPortForm()
+    if request.method == "POST":
+        form = SmartmeterPortForm(request.POST)
+        if form.is_valid():
+                SmartmeterPort = form.save(commit=False)
+                SmartmeterPort.createdby = request.user
+                SmartmeterPort.modifiedby = request.user
+                SmartmeterPort = SmartmeterPort.save()
+                print(" form is valid and in try block")
+                return redirect('/showsmartmeter')
+    else:
+        print("in else part")
+        form = SmartmeterPortForm()
+    return render(request,"smartmeterport.html",{'form':form})
+
+def editsmartmeter(request, id):
+    obj = Location.objects.get(location_id=id)
+    updated_on = obj.modifieddate
+    return render(request, 'editlocation.html', {'employee': obj, 'updated_on': updated_on})
+
+def brandandmanuf(request):
+    form = BrandandManufacturerForm()
+    if request.method == "POST":
+        form = BrandandManufacturerForm(request.POST)
+        if form.is_valid():
+            Brand_and_Manufacturer = form.save(commit=False)
+            Brand_and_Manufacturer.createdby = request.user
+            Brand_and_Manufacturer.modifiedby = request.user
+            Brand_and_Manufacturer = Brand_and_Manufacturer.save()
+            print(" form is valid and in try block")
+            return redirect('/showbrandandmanuf')
+    else:
+        print("in else part")
+        form = BrandandManufacturerForm()
+    return render(request, "brandandmanuf.html", {'form': form})
+
+def showbrandandmanuf(request):
+    cd = Brand_and_Manufacturer.objects.all()
+    return render(request, "showbrandandmanuf.html", {'result': cd})
+
 
 def about(request):
     return render(request, 'about.html')
@@ -163,7 +223,7 @@ def showlocation(request):
 def editlocation(request, id):
     obj = Location.objects.get(location_id=id)
     updated_on = obj.modifieddate
-    return render(request,'edit.html', {'employee':obj,'updated_on':updated_on})
+    return render(request,'editlocation.html', {'employee':obj,'updated_on':updated_on})
 
 def updatelocation(request, id):
     form = LocationForm()
@@ -208,7 +268,7 @@ def load_location(request):
     # return JsonResponse(list(cities.values('id', 'name')), safe=False)
 
 def editarea(request, id):
-    obj = Area.objects.get(id=id)
+    obj = Area.objects.get(area_id=id)
     print("obj:", obj)
     form = AreaForm(request.POST, instance=obj)
     updated_on = obj.modifieddate
@@ -217,7 +277,7 @@ def editarea(request, id):
 def updatearea(request, id):
     form = AreaForm()
     if request.method == 'POST':
-        obj = Area.objects.get(id=id)
+        obj = Area.objects.get(area_id=id)
         print("obj:",obj)
         form = AreaForm(request.POST, instance=obj)
         if form.is_valid():
@@ -230,7 +290,7 @@ def updatearea(request, id):
 
 def destroyarea(request, id):
     #print("company id",id)
-    obj = Area.objects.get(id=id)
+    obj = Area.objects.get(area_id=id)
     obj.delete()
     return redirect("/showarea")
 
