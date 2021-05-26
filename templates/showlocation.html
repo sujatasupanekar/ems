@@ -13,41 +13,21 @@
             <thead>
             <tr>
             <th>ID</th>
-            <th hidden>company</th>
             <th>Short name</th>
             <th>Description</th>
             <th>Street</th>
-            <th hidden>country_code</th>
-            <th hidden>zip_code</th>
-            <th hidden>town</th>
-            <th hidden>country</th>
             <th>Contact person</th>
-            <th hidden>email</th>
-            <th hidden>tel_no</th>
-            <th hidden>fax_no</th>
-            <th hidden>location_logo</th>
             <th>Actions</th>
             </tr>
             </thead>
             <tbody>
             {% for i in result %}
-            <!--  <tr>
-                {% for j in i %}
-                  {% if not forloop.first %}          
-                    <td>{{j}}</td>
-                  {% endif %}
-                {% endfor %}
-                <td>
-                  <a href="/edit/{{ i.location_id }}"><span class="glyphicon glyphicon-pencil" >Update</span></a>
-                  <a href="/delete/{{ i.location_id }}">Delete</a>
-                </td>
-              </tr>  -->
             <tr>
-              <td>{{ i.location_id}}</td>
-              <td>{{ i.short_name}}</td>
-              <td>{{ i.description}}</td>
-              <td>{{ i.street}}</td>
-              <td>{{ i.contact_person}}</td>
+              <td>{{ i.location_id }}</td>
+              <td>{{ i.short_name }}</td>
+              <td>{{ i.description }}</td>
+              <td>{{ i.street }}</td>
+              <td>{{ i.contact_person }}</td>
               <td>
                   <a href="/editlocation/{{ i.location_id }}"><span class="glyphicon glyphicon-pencil" >Update</span></a>
                   <a href="/deletelocation/{{ i.location_id }}">Delete</a>
@@ -56,7 +36,7 @@
             {% endfor %}
           </tbody>
         </table>
-        <a href="addlocation" class="btn btn-primary ems-button">Add New Record</a>
+        <a href="addlocation" class="btn btn-primary ems-button">Add New Location</a>
     </form>
 {% endblock %}
 

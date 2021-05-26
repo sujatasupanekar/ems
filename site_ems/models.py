@@ -135,16 +135,19 @@ class Smartmeter(models.Model):
     modifiedby = models.CharField(max_length=50, default=None)
     modifieddate = models.DateTimeField(auto_now=True, null=True, blank=True)
 
-port_type_choices = [('RS232', 'RS232'), ('RS485', 'RS485'), ('Network', 'Network')]
-communication_type_choices = [('serial', 'Serial'), ('tcp/ip', 'TCP/IP')]
-parity_choices = [('even',"Even"),('odd','Odd')]
-flow_control_choices = [('xon','X on'),('X off','X off')]
-data_bit_choices =  [tuple([x,x]) for x in range(1,32)]
-baud_rate_choices =  [tuple([x,x]) for x in range(1,32)]
-stop_bit_choices =  [tuple([x,x]) for x in range(1,5)]
-reading_type_choices = [('Local server','Direct'),('remote server','PC')]
+    def __str__(self):
+        return (self.smartmeter_id + self.parent_smartmeter_id)
 
 class SmartmeterPort(models.Model):
+    port_type_choices = [('RS232', 'RS232'), ('RS485', 'RS485'), ('Network', 'Network')]
+    communication_type_choices = [('serial', 'Serial'), ('tcp/ip', 'TCP/IP')]
+    parity_choices = [('even', "Even"), ('odd', 'Odd')]
+    flow_control_choices = [('xon', 'X on'), ('X off', 'X off')]
+    data_bit_choices = [tuple([x, x]) for x in range(1, 32)]
+    baud_rate_choices = [tuple([x, x]) for x in range(1, 32)]
+    stop_bit_choices = [tuple([x, x]) for x in range(1, 5)]
+    reading_type_choices = [('Local server', 'Direct'), ('remote server', 'PC')]
+
     port_type = models.CharField(max_length=10,choices=port_type_choices,default=None)
     communication_type = models.CharField(max_length=10,choices=communication_type_choices,default=None)
     device_id = models.CharField(max_length=20)
@@ -161,3 +164,7 @@ class SmartmeterPort(models.Model):
     stop_bits = models.BooleanField(max_length=4, choices=stop_bit_choices, blank=True, null=True)
     flow_control = models.BooleanField(max_length=5,choices=flow_control_choices, blank=True, null=True)
     modem_port = models.CharField(max_length=10, blank=True, null=True)
+    createdby = models.CharField(max_length=50, default=None)
+    createddate = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+    modifiedby = models.CharField(max_length=50, default=None)
+    modifieddate = models.DateTimeField(auto_now=True, null=True, blank=True)

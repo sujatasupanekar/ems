@@ -29,7 +29,7 @@ urlpatterns = [
     path('editlocation/<int:id>', views.editlocation),
     path('updatelocation/<int:id>', views.updatelocation),
     path('deletelocation/<int:id>', views.destroylocation),
-    ### URL for location
+    ### URL for area
     path('addarea', views.addarea),
     path('showarea', views.showarea),
     path('editarea/<int:id>', views.editarea),

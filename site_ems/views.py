@@ -176,7 +176,6 @@ def get_consortium():
     return ls
 
 def addlocation(request):
-    ls = []
     if request.method == "POST":
         form = LocationForm(request.POST)
         if form.is_valid():
@@ -185,39 +184,15 @@ def addlocation(request):
                 Location.modifiedby = request.user
                 Location = Location.save()
                 print(" form is valid and in try block")
-                #result = getlocation()
-                return render(request,'showlocation.html')
+                return redirect('/showlocation')
     else:
         print("in else part")
         form = LocationForm()
     return render(request,'addlocation.html',{'form':form})
 
-def getlocation():
-    result = []
-    loc = Location.objects.all()
-    for i in loc:
-        t1 = i.location_id
-        t2 = i.short_name
-        t3 = i.description
-        t4 = i.street
-        t5 = i.contact_person
-        ls = [t1, t2, t3, t4, t5]
-        print(ls)
-        result.append(ls)
-    print(type(result))
-    return result
-
-def getcompany():
-    obj = Company.objects.all()
-    ls = []
-    for i in obj:
-        nm = i.company_name1
-        ls.append(nm)
-    print(ls)
-    return ls
-
 def showlocation(request):
     result = Location.objects.all()
+    #print(result)
     return render(request,'showlocation.html',{'result':result})
 
 def editlocation(request, id):
@@ -236,13 +211,12 @@ def updatelocation(request, id):
     return render(request, 'editlocation.html', {'employee': obj})
 
 def destroylocation(request, id):
-    #print("company id",id)
+    print("location id",id)
     obj = Location.objects.get(location_id=id)
     obj.delete()
     return redirect("/showlocation")
 
 def addarea(request):
-    full_list = getcompany()
     if request.method == "POST":
         form = AreaForm(request.POST)
         if form.is_valid():
