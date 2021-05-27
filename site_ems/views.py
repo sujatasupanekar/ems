@@ -198,7 +198,9 @@ def showlocation(request):
 def editlocation(request, id):
     obj = Location.objects.get(location_id=id)
     updated_on = obj.modifieddate
-    return render(request,'editlocation.html', {'employee':obj,'updated_on':updated_on})
+    print(obj,updated_on)
+    form = LocationForm(request.POST,instance=obj)
+    return render(request,'editlocation.html', {'form':form,'employee':obj,'updated_on':updated_on})
 
 def updatelocation(request, id):
     form = LocationForm()

@@ -10,8 +10,8 @@
 <form method="POST" class="post-form" action="/updatelocation/{{employee.location_id}}">
         {% csrf_token %}
 
-    {{ form.errors }}
-    {{ form.non_field_errors }}
+    <!-- {{ form.errors }}
+    {{ form.non_field_errors }}  -->
     <div class="container">
 <br>
     <div class="form-group row">
@@ -20,8 +20,9 @@
     <h3>Update Details</h3>
     </div>
   </div>
+        <table>
      {{ form }}
-
+</table>
    <div class="form-group row">
     <label class="col-sm-1 col-form-label"></label>
     <div class="col-sm-4">

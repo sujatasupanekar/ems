@@ -42,9 +42,6 @@ class SmartmeterForm(forms.ModelForm):
         fields = ['brand_id','description','max_no_of_channels']
 
 class SmartmeterPortForm(forms.ModelForm):
-    #port_type_choices = [('RS232','RS232'),('RS485','RS485'),('Network','Network')]
-    #communication_type_choices = [('serial', 'Serial'), ('tcp/ip', 'TCP/IP')]
-
     class Meta:
         model = SmartmeterPort
         fields = ['port_type','communication_type','reading_type','baud_rate','data_bits','parity',
