@@ -32,10 +32,12 @@ class EMSSidebar extends HTMLElement {
                 </button>
               </h2>
               <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                  <div class="accordion-body"><div><a href="/cmp" class="opt-a"><span class="panel-dropdown-text">Company</span></a></div></div>
-                  <div class="accordion-body"><div><a href="/cmp" class="opt-a"><span class="panel-dropdown-text">Location</span></a></div></div>
-                  <div class="accordion-body"><div><a href="/cmp" class="opt-a"><span class="panel-dropdown-text">Area</span></a></div></div>
-                  <div class="accordion-body"><div><a href="/cmp" class="opt-a"><span class="panel-dropdown-text">Virtual Channel</span></a></div></div>
+                    <div class="accordion-body"><div><a href="/showcompany" class="opt-a"><span class="panel-dropdown-text">Company</span></a></div></div>
+                    <div class="accordion-body"><div><a href="/showlocation" class="opt-a"><span class="panel-dropdown-text">Location</span></a></div></div>
+                    <div class="accordion-body"><div><a href="/showarea" class="opt-a"><span class="panel-dropdown-text">Area</span></a></div></div>
+                    <div class="accordion-body"><div><a href="/showvirtualchannel" class="opt-a"><span class="panel-dropdown-text">Virtual Channel</span></a></div></div>
+                    <div class="accordion-body"><div><a href="/showemanage" class="opt-a"><span class="panel-dropdown-text">Eamange</span></a></div></div>
+                    <div class="accordion-body"><div><a href="/showroicalc" class="opt-a"><span class="panel-dropdown-text">ROI Calculator</span></a></div></div>
       
               </div>
             </div>
