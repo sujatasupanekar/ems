@@ -197,6 +197,14 @@ def showlocation(request):
 
 def editlocation(request, id):
     obj = Location.objects.get(location_id=id)
+    obj1 = Location.objects.get(pk=id)
+    print("obj1:",obj1)
+    result = Location.objects.all()
+    for i in result:
+        print(i.location_id,i.company)
+       # temp = i.location_id
+       # if temp == id:
+        obj = Location.objects.get(i.pk)
     updated_on = obj.modifieddate
     print(obj,updated_on)
     form = LocationForm(request.POST,instance=obj)
