@@ -16,11 +16,20 @@ from django.contrib.auth.forms import PasswordResetForm
 from django.contrib.auth.models import User
 from .models import Company,Location,Consortium,Area,Smartmeter,SmartmeterPort,Brand_and_Manufacturer
 from .forms import CompanyForm,LocationForm,AreaForm,SmartmeterForm,SmartmeterPortForm,BrandandManufacturerForm
+import random
 
 # Create your views here.
 def index(request):
     print("in index ")
     return HttpResponse('Hello, welcome to the index page.')
+
+def consumption_graph(request):
+    randomlist = []
+    for i in range(0, 5):
+        n = random.randint(1000, 9999)
+        randomlist.append(n)
+    print(randomlist)
+    return render(request,'consumption_graph.html',{'data_set':randomlist})
 
 def addsmartmeter(request):
     if request.method == "POST":

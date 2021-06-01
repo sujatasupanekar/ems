@@ -16,7 +16,7 @@ urlpatterns = [
     url(r'^logout/$', views.logout, name='logout'),
     url(r'^adminpage$', views.adminpage, name='adminpage'),
     url(r'^userpage$', views.userpage, name='userpage'),
-
+    url(r'^consumption_graph',views.consumption_graph,name='consumption_graph'),
     ### URL for company
     path('addcompany',views.addcompany,name="addcompany"),
     path('showcompany', views.showcompany),
