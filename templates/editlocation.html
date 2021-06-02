@@ -17,9 +17,9 @@
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Company:</label>
                 <div class="col-sm-4">
-                    <select id="company" name="company" required maxlenght="15">
+                    <select id="company" name="company" required>
                         {% for cnm in cnm_list %}
-                            <option value="{{cnm}}">{{employee.company}}</option>
+                            <option value="{{cnm.location_id}}">{{employee.company}}</option>
                         {% endfor %}
                     </select>
             <!--        <input type="text" name="company" id="company" required maxlength="15" value="{{ employee.company }}"/>  -->

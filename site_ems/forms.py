@@ -13,7 +13,7 @@ class CompanyForm(forms.ModelForm):
         }
 
 class LocationForm(forms.ModelForm):
-    company = forms.ModelChoiceField(queryset=Company.objects.all(),initial=0)
+    company = forms.ModelChoiceField(queryset=Company.objects.all(),initial=0,required=False)
     class Meta:
         model = Location
         fields = ['company','short_name','description','street','town','zip_code','country','contact_person',
@@ -25,8 +25,8 @@ class LocationForm(forms.ModelForm):
 
 
 class AreaForm(forms.ModelForm):
-    company = forms.ModelChoiceField(queryset=Company.objects.all(),initial=0)
-    location = forms.ModelChoiceField(queryset=Location.objects.all(),initial=0)
+    company = forms.ModelChoiceField(queryset=Company.objects.all(),initial=0,required=False)
+    location = forms.ModelChoiceField(queryset=Location.objects.all(),initial=0,required=False)
 
     class Meta:
         model = Area

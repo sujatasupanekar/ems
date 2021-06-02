@@ -20,10 +20,10 @@
         <div class="col-sm-4">
              <select id="company" name="company" required>
                 {% for cnm in cmp_list %}
-              <!--  <option value="{{cnm}}">{{employee.company}}</option>
-                <option value="{{ cnm.company_name1 }}"{% if cnm.company_name1 == company %}selected{% endif %}>
-                    {{ cnm.company }}
-                {% endfor %}  -->
+               <option value="{{cnm}}">{{cnm}}</option>
+              <!--  <option value="{{ cnm.company_name1 }}"{% if cnm.company_name1 == company %}selected{% endif %}>
+                    {{ cnm.company }}  -->
+                {% endfor %}
             </select>
         <!--<input type="text" name="company" id="company" required maxlength="30" value="{{ employee.company }}"/> -->
         </div>
@@ -33,7 +33,7 @@
         <div class="col-sm-4">
             <select id="location" name="location" required>
                 {% for lnm in lnm_list %}
-                    <option value="{{lnm}}">{{employee.location}}</option>
+                    <option value="{{lnm}}">{{lnm}}</option>
                 {% endfor %}
             </select>
       <!--<input type="text" name="location" id="location" required maxlength="15" value="{{ employee.location }}"/>-->
