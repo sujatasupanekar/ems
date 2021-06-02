@@ -14,7 +14,6 @@ class CompanyForm(forms.ModelForm):
 
 class LocationForm(forms.ModelForm):
     company = forms.ModelChoiceField(queryset=Company.objects.all(),initial=0)
-
     class Meta:
         model = Location
         fields = ['company','short_name','description','street','town','zip_code','country','contact_person',

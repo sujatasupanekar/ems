@@ -25,7 +25,7 @@ def index(request):
 
 def consumption_graph(request):
     randomlist = []
-    for i in range(0, 5):
+    for i in range(0, 50):
         n = random.randint(1000, 9999)
         randomlist.append(n)
     print(randomlist)
@@ -173,6 +173,12 @@ def destroycompany(request, id):
     employee.delete()
     return redirect("/showcompany")
 
+def get_company_list():
+    cmp_list = []
+    t1 = Company.objects.all()
+    for i in t1:
+        cmp_list.append(i.company_name1)
+    return cmp_list
 
 def get_consortium():
     temp = Consortium.objects.all()
@@ -186,12 +192,13 @@ def get_consortium():
 
 def addlocation(request):
     if request.method == "POST":
-        form = LocationForm(request.POST)
+        form = LocationForm(request.POST or None)
         if form.is_valid():
-                Location = form.save(commit=False)
-                Location.createdby = request.user
-                Location.modifiedby = request.user
-                Location = Location.save()
+                location = form.save(commit=False)
+                location.createdby = request.user
+                location.modifiedby = request.user
+                print(location)
+                location.save()
                 print(" form is valid and in try block")
                 return redirect('/showlocation')
     else:
@@ -207,12 +214,15 @@ def showlocation(request):
 def editlocation(request, id):
     obj = Location.objects.get(location_id=id)
     updated_on = obj.modifieddate
-    return render(request,'editlocation.html', {'employee':obj,'updated_on':updated_on})
+    print("obj in Edit location:",obj,id)
+    cnm_list = Company.objects.all()
+    return render(request,'editlocation.html', {'cnm_list':cnm_list,'employee':obj,'updated_on':updated_on})
 
 def updatelocation(request, id):
     form = LocationForm()
     if request.method == 'POST':
         obj = Location.objects.get(location_id=id)
+        print("obj in update location:",obj,id)
         form = LocationForm(request.POST, instance=obj)
         if form.is_valid():
             form.save()
@@ -224,6 +234,13 @@ def destroylocation(request, id):
     obj = Location.objects.get(location_id=id)
     obj.delete()
     return redirect("/showlocation")
+
+def get_location_list():
+    lnm_list = []
+    t2 = Location.objects.all()
+    for j in t2:
+        lnm_list.append(j.short_name)
+    return lnm_list
 
 def addarea(request):
     if request.method == "POST":
@@ -253,9 +270,12 @@ def load_location(request):
 def editarea(request, id):
     obj = Area.objects.get(area_id=id)
     print("obj:", obj)
-    form = AreaForm(request.POST, instance=obj)
+    #cnm_list = get_company_list()
+    cnm_list = Company.objects.all()
+    lnm_list = Location.objects.all()
     updated_on = obj.modifieddate
-    return render(request,'editarea.html', {'form':form,'employee':obj,'updated_on':updated_on})
+    print("cnm_list:",cnm_list)
+    return render(request,'editarea.html', {'cmp_list':cnm_list,'lnm_list':lnm_list,'employee':obj,'updated_on':updated_on})
 
 def updatearea(request, id):
     form = AreaForm()
@@ -263,13 +283,16 @@ def updatearea(request, id):
         obj = Area.objects.get(area_id=id)
         print("obj:",obj)
         form = AreaForm(request.POST, instance=obj)
+        cnm_list = get_company_list()
+        lnm_list = get_location_list()
+        updated_on = obj.modifieddate
         if form.is_valid():
             form.save()
             print("in if form valid loop")
             return redirect("/showarea")
         else:
             print(form.errors)
-    return render(request, 'editarea.html', {'employee': obj})
+    return render(request, 'editarea.html', {'cmp_list':cnm_list,'lnm_list':lnm_list,'employee': obj,'updated_on':updated_on})
 
 def destroyarea(request, id):
     #print("company id",id)

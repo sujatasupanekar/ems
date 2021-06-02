@@ -70,8 +70,8 @@ class Consortium(models.Model):
     tax_no2 = models.CharField(max_length=40)
 
 class Location(models.Model):
-    company = models.ForeignKey(Company, on_delete=models.CASCADE, blank=True, null=True, default="My Company")
-    location_id = models.AutoField(primary_key=True, default="10")
+    company = models.ForeignKey(Company, on_delete=models.CASCADE, blank=True, null=True)
+    location_id = models.AutoField(primary_key=True)
     short_name = models.CharField(max_length=15, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     street = models.TextField(blank=True, null=True)

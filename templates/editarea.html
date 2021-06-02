@@ -7,44 +7,54 @@
 
 {% block main_content %}
 
-  <form method="POST" class="main-content-form" action="/updatearea/{{employee.area_id}}">
-        {% csrf_token %}
-
-  <div class="form-group row">
-    <label  class="col-sm-2 col-form-label">AreaId:</label>
-    <div class="col-sm-4">
-        <input type="text"  name="id" id="id" required value="{{ employee.area_id }}"/>
-  </div>
-    <!--<div class="form-group row">
-    <label class="col-sm-2 col-form-label">Company:</label>
-    <div class="col-sm-4">
-        <input type="text" name="company" id="company" required maxlength="30" value="{{ employee.company }}"/>
+<form method="POST" class="main-content-form" action="/updatearea/{{employee.area_id}}">
+     {% csrf_token %}
+     <div class="form-group row">
+        <label  class="col-sm-2 col-form-label">AreaId:</label>
+        <div class="col-sm-4">
+            <input type="text"  name="id" id="id" required value="{{ employee.area_id }}"/>
+        </div>
+     </div>
+     <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Company:</label>
+        <div class="col-sm-4">
+             <select id="company" name="company" required>
+                {% for cnm in cmp_list %}
+              <!--  <option value="{{cnm}}">{{employee.company}}</option>
+                <option value="{{ cnm.company_name1 }}"{% if cnm.company_name1 == company %}selected{% endif %}>
+                    {{ cnm.company }}
+                {% endfor %}  -->
+            </select>
+        <!--<input type="text" name="company" id="company" required maxlength="30" value="{{ employee.company }}"/> -->
+        </div>
+     </div>
+     <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Location:</label>
+        <div class="col-sm-4">
+            <select id="location" name="location" required>
+                {% for lnm in lnm_list %}
+                    <option value="{{lnm}}">{{employee.location}}</option>
+                {% endfor %}
+            </select>
+      <!--<input type="text" name="location" id="location" required maxlength="15" value="{{ employee.location }}"/>-->
+        </div>
     </div>
-  </div>
     <div class="form-group row">
-    <label class="col-sm-2 col-form-label">Location:</label>
-    <div class="col-sm-4">
-      <input type="text" name="location" id="location" required maxlength="15" value="{{ employee.location }}"/>
+        <label class="col-sm-2 col-form-label">Area:</label>
+        <div class="col-sm-4">
+            <input type="text" name="area" id="area" required maxlength="50" value="{{ employee.area }}"/>
+        </div>
     </div>
-  </div>
     <div class="form-group row">
-    <label class="col-sm-2 col-form-label">Area:</label>
-    <div class="col-sm-4">
-      <input type="text" name="area" id="area" required maxlength="50" value="{{ employee.area }}"/>
+        <label class="col-sm-2 col-form-label">Area logo:</label>
+        <div class="col-sm-4">
+            <input type="text" name="area_logo" id="area_logo" required maxlength="100" value="{{ employee.area_logo }}"/>
+        </div>
     </div>
-  </div>
-  <div class="form-group row">
-    <label class="col-sm-2 col-form-label">Area logo:</label>
-    <div class="col-sm-4">
-      <input type="text" name="area_logo" id="area_logo" required maxlength="100" value="{{ employee.area_logo }}"/>
-    </div>
-  </div>
-    </div>  -->
-
-         <table>
+<!--   <table>
           {{form}}
-      </table>
-    <button type="submit" class="btn btn-success">Update</button>
+      </table>  -->
+  <button type="submit" class="btn btn-success">Update</button>
   {{ updated_on }}
 </form>
 {% endblock %}

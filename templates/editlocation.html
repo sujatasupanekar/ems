@@ -6,12 +6,96 @@
 {% endblock %}
 
 {% block main_content %}
-    <form class="main-content-form" action="/updatelocation/{{employee.location_id}}" method="POST">
+<form class="main-content-form" action="/updatelocation/{{employee.location_id}}" method="POST">
         {% csrf_token %}
-        <table>
-            {{form}}
-        </table>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Location Id:</label>
+                <div class="col-sm-4">
+                    <input type="text" name="location_id" id="location_id" required maxlength="20" value="{{ employee.location_id }}"/>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Company:</label>
+                <div class="col-sm-4">
+                    <select id="company" name="company" required maxlenght="15">
+                        {% for cnm in cnm_list %}
+                            <option value="{{cnm}}">{{employee.company}}</option>
+                        {% endfor %}
+                    </select>
+            <!--        <input type="text" name="company" id="company" required maxlength="15" value="{{ employee.company }}"/>  -->
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Short Name:</label>
+                <div class="col-sm-4">
+                    <input type="text" name="short_name" id="short_name" required maxlength="10" value="{{ employee.short_name }}"/>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Description:</label>
+                <div class="col-sm-4">
+                    <input type="text" name="description" id="description" required maxlength="55" value="{{ employee.description }}"/>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Street:</label>
+                <div class="col-sm-4">
+                    <input type="text" name="street" id="street" required maxlength="255" value="{{ employee.street }}"/>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Town:</label>
+                <div class="col-sm-4">
+                    <input type="text" name="town" id="town" required maxlength="30" value="{{ employee.town }}"/>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Zipcode:</label>
+                <div class="col-sm-4">
+                    <input type="text" name="zip_code" id="zip_code" required maxlength="6" value="{{ employee.zip_code }}"/>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Country:</label>
+                <div class="col-sm-4">
+                    <input type="text" name="country" id="country" required maxlength="30" value="{{ employee.country }}"/>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Contact person:</label>
+                <div class="col-sm-4">
+                    <input type="text" name="contact_person" id="contact_person" required maxlength="100" value="{{ employee.contact_person }}"/>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">email:</label>
+                <div class="col-sm-4">
+                    <input type="text" name="email" id="email" required value="{{ employee.email }}"/>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Telephone number:</label>
+                <div class="col-sm-4">
+                    <input type="text" name="tel_no" id="tel_no" required maxlength="10" value="{{ employee.tel_no }}"/>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Fax no:</label>
+                <div class="col-sm-4">
+                    <input type="text" name="fax_no" id="fax_no" required maxlength="10" value="{{ employee.fax_no }}"/>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Location logo:</label>
+                <div class="col-sm-4">
+                    <input type="text" name="location_logo" id="location_logo" required maxlength="10" value="{{ employee.location_logo }}"/>
+                </div>
+            </div>
+     <!--  <table>
+            {{ form }}
+        </table> -->
 
         <button type="submit" class="btn btn-primary ems-button">Update Location</button>
+         {{ updated_on }}
     </form>
 {% endblock %}
