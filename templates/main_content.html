@@ -3,6 +3,8 @@
 
 {% block main_content_block %}
     <div class="form-container">
+        <ems-header name="{{user.first_name}}" isAuthenticated="{{user.is_authenticated}}"></ems-header>
+        <ems-sidebar name="{{ user }}"></ems-sidebar>
         {% block main_content %}
         {% endblock %}
     </div>

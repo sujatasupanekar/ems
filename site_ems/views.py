@@ -146,9 +146,9 @@ def addcompany(request):
 
 def showcompany(request):
     cd = Company.objects.all()
-    for i in cd:
-        instance = i.createddate
-        print(instance)
+   # for i in cd:
+   #     instance = i.createddate
+   #     print(instance)
     return render(request, "showcompany.html", {'cd': cd})
 
 def editcompany(request, id):

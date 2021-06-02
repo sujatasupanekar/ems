@@ -20,7 +20,6 @@ class EMSSidebar extends HTMLElement {
                     <div class="accordion-body"><div><a href="/addlocation" class="opt-a"><span class="panel-dropdown-text">Location</span></a></div></div>
                     <div class="accordion-body"><div><a href="/addarea" class="opt-a"><span class="panel-dropdown-text">Area</span></a></div></div>
                     <div class="accordion-body"><div><a href="/virtualchannel" class="opt-a"><span class="panel-dropdown-text">Virtual Channel</span></a></div></div>
-                    <div class="accordion-body"><div><a href="/emanage" class="opt-a"><span class="panel-dropdown-text">Eamange</span></a></div></div>
                     <div class="accordion-body"><div><a href="/roicalc" class="opt-a"><span class="panel-dropdown-text">ROI Calculator</span></a></div></div>
                 </div>
             </div>
@@ -36,10 +35,7 @@ class EMSSidebar extends HTMLElement {
                     <div class="accordion-body"><div><a href="/showlocation" class="opt-a"><span class="panel-dropdown-text">Location</span></a></div></div>
                     <div class="accordion-body"><div><a href="/showarea" class="opt-a"><span class="panel-dropdown-text">Area</span></a></div></div>
                     <div class="accordion-body"><div><a href="/showvirtualchannel" class="opt-a"><span class="panel-dropdown-text">Virtual Channel</span></a></div></div>
-                    <div class="accordion-body"><div><a href="/showemanage" class="opt-a"><span class="panel-dropdown-text">Eamange</span></a></div></div>
-                    <div class="accordion-body"><div><a href="/showroicalc" class="opt-a"><span class="panel-dropdown-text">ROI Calculator</span></a></div></div>
-      
-              </div>
+               </div>
             </div>
 
             <div class="accordion-item">

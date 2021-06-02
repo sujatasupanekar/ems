@@ -9,7 +9,7 @@
 {% block main_content %}
     <form class="main-content-form" action="/roicalc">
         {% csrf_token %}
-
+  <table>
   <label for="curr">Currency:</label>
   <input type="text" id="curr" name="curr"><br><br>
   <label for="annenrgycost">Annual Energy Cost:</label>
@@ -27,5 +27,6 @@
   <label for="ioesm">Investment on Energy Saving Measures(>1Lakh):</label>
   <input type="text" id="ioesm" name="ioesm"><br><br>
   <input type="submit" value="Calculate">
+  </table>
 </form>
 {% endblock %}
