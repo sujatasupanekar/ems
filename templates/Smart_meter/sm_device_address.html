@@ -1,0 +1,29 @@
+{% extends 'main_content.html' %}
+{% load static %}
+
+{% block main_content_header %}
+    Smart Meter Defination : Device Address
+{% endblock %}
+
+{% block main_content %}
+    <form class="main-content-form">
+        {% csrf_token %}
+            <label for="station_nm"> Station name:</label>
+            <input type="checkbox" id="station_nm" name="station_nm">
+            <br>
+            <label for="station_id"> Station ID:</label>
+            <input type="checkbox" id="station_id" name="station_id">&nbsp;&nbsp;
+            <label>Default: </label>
+            <input type="text">
+            <br>
+            <label for="password"> Password:</label>
+            <input type="checkbox" id="password" name="password" value="">&nbsp;&nbsp;
+            <label>Default: </label>
+            <input type="text">
+            <br>
+    </form>
+{% endblock %}
+
+
+
+

@@ -1,0 +1,41 @@
+{% extends 'main_content.html' %}
+{% load static %}
+
+{% block main_content_header %}
+    SM Brand and Manufacturer Details
+{% endblock %}
+
+{% block main_content %}
+    <form class="main-content-form">
+        {% csrf_token %}
+          <table class="table table-striped">
+            <thead>
+            <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Entity type</th>
+            <th>Type</th>
+            <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for i in result %}
+              <tr>
+                <td>{{i.id}}</td>
+                <td>{{i.name}}</td>
+                <td>{{i.entity_type}}</td>
+                <td>{{i.type}}</td>
+                <td>
+                    <a href="/editarea/{{ i.area_id }}"><span class="glyphicon glyphicon-pencil" >Update</span></a>
+                    <a href="/deletearea/{{ i.area_id }}">Delete</a>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+    </form>
+{% endblock %}
+
+
+
+

@@ -35,7 +35,7 @@ class AreaForm(forms.ModelForm):
 class SmartmeterForm(forms.ModelForm):
     company = forms.ModelChoiceField(queryset=Company.objects.all(), initial=0)
     location = forms.ModelChoiceField(queryset=Location.objects.all(), initial=0)
-
+    area = forms.ModelChoiceField(queryset=Area.objects.all(),initial=0)
     class Meta:
         model = Smartmeter
         fields = ['brand_id','description','max_no_of_channels']
@@ -45,6 +45,12 @@ class SmartmeterPortForm(forms.ModelForm):
         model = SmartmeterPort
         fields = ['port_type','communication_type','reading_type','baud_rate','data_bits','parity',
                   'stop_bits','flow_control']
+
+class SmartmeterLinkDeviceForm(forms.Form):
+    device_name = forms.CharField(max_length=20)
+    port_type = forms.ChoiceField()
+    link_name = forms.CharField(max_length=40)
+    communication_type = forms.ChoiceField()
 
 class BrandandManufacturerForm(forms.ModelForm):
     class Meta:

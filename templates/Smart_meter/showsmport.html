@@ -1,0 +1,41 @@
+{% extends 'main_content.html' %}
+{% load static %}
+
+{% block main_content_header %}
+    Smart Meter Port Defination
+{% endblock %}
+
+{% block main_content %}
+    <form class="main-content-form">
+        {% csrf_token %}
+          <table class="table table-striped">
+            <thead>
+            <tr>
+            <th>Port type</th>
+            <th>Total port</th>
+            <th>Communication setting</th>
+            <th>Auto/Driver</th>
+            <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for i in result %}
+              <tr>
+                <td>{{i.port_type}}</td>
+                <td>{{i.total_port}}</td>
+                <td>{{i.communication_setting}}</td>
+                <td>{{i.auto_or_driver}}</td>
+                <td>
+                    <a href="/editsmport/{{ i.id }}"><span class="glyphicon glyphicon-pencil" >Update</span></a>
+                    <a href="/deletesmport/{{ i.id }}">Delete</a>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+    </form>
+{% endblock %}
+
+
+
+

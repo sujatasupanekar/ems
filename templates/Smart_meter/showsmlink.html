@@ -1,0 +1,43 @@
+{% extends 'main_content.html' %}
+{% load static %}
+
+{% block main_content_header %}
+    Smart Meter Details : Link Devices
+{% endblock %}
+
+{% block main_content %}
+    <form class="main-content-form">
+        {% csrf_token %}
+          <table class="table table-striped">
+            <thead>
+            <tr>
+            <th>Port type</th>
+            <th>Link name</th>
+            <th>Communication type</th>
+            <th>Linking device</th>
+            <th>Link port</th>
+            <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for i in result %}
+              <tr>
+                <td>{{i.port_type}}</td>
+                <td>{{i.link_name}}</td>
+                <td>{{i.communication_type}}</td>
+                <td>{{i.linking_device}}</td>
+                <td>{{i.link_port}}</td>
+                <td>
+                    <a href="/editsmlink/{{ i.id }}"><span class="glyphicon glyphicon-pencil" >Update</span></a>
+                    <a href="/deletesmlink/{{ i.id }}">Delete</a>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+    </form>
+{% endblock %}
+
+
+
+

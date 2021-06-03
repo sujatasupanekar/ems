@@ -16,6 +16,7 @@ from django.contrib.auth.forms import PasswordResetForm
 from django.contrib.auth.models import User
 from .models import Company,Location,Consortium,Area,Smartmeter,SmartmeterPort,Brand_and_Manufacturer
 from .forms import CompanyForm,LocationForm,AreaForm,SmartmeterForm,SmartmeterPortForm,BrandandManufacturerForm
+from .forms import SmartmeterLinkDeviceForm
 import random
 
 # Create your views here.
@@ -44,13 +45,13 @@ def addsmartmeter(request):
     else:
         print("in else part")
         form = SmartmeterForm()
-    return render(request,'addsmartmeter.html',{'form':form})
+    return render(request,'Smart_meter/addsmartmeter.html',{'form':form})
 
 def showsmartmeter(request):
     result = Smartmeter.objects.all()
-    return render(request, 'showsmartmeter.html', {'result': result})
+    return render(request, 'Smart_meter/showsmartmeter.html', {'result': result})
 
-def smartmeterport(request):
+def addsmport(request):
     form = SmartmeterPortForm()
     if request.method == "POST":
         form = SmartmeterPortForm(request.POST)
@@ -60,16 +61,49 @@ def smartmeterport(request):
                 SmartmeterPort.modifiedby = request.user
                 SmartmeterPort = SmartmeterPort.save()
                 print(" form is valid and in try block")
-                return redirect('/showsmartmeter')
+                return redirect('Smart_meter/showsmport')
     else:
         print("in else part")
         form = SmartmeterPortForm()
-    return render(request,"smartmeterport.html",{'form':form})
+    return render(request,"Smart_meter/addsmport.html",{'form':form})
+
+def showsmport(request):
+    obj = SmartmeterPort.objects.all()
+    return render(request,'Smart_meter/showsmport.html',{'result':obj})
 
 def editsmartmeter(request, id):
     obj = Location.objects.get(location_id=id)
     updated_on = obj.modifieddate
     return render(request, 'editlocation.html', {'employee': obj, 'updated_on': updated_on})
+
+def addsmlink(request):
+    form = SmartmeterLinkDeviceForm()
+    if request.method == "POST":
+        form = SmartmeterLinkDeviceForm(request.POST)
+        if form.is_valid():
+                # = form.save(commit=False)
+                #SmartmeterPort.createdby = request.user
+                #SmartmeterPort.modifiedby = request.user
+                #SmartmeterPort = SmartmeterPort.save()
+                print(" form is valid and in try block")
+                return redirect('Smart_meter/showsmlink')
+    else:
+        print("in else part")
+        form = SmartmeterLinkDeviceForm()
+    return render(request,"Smart_meter/addsmlink.html",{'form':form})
+
+def showsmlink(request):
+    obj = Smartmeter.objects.all()
+    return render(request,"Smart_meter/showsmlink.html",{'result':obj})
+
+def sm_brand_n_manf(request):
+    return render(request,'Smart_meter/sm_brand_n_manf.html')
+
+def sm_overview_screen(request):
+    return render(request,'Smart_meter/sm_overview_screen.html')
+
+def sm_device_address(request):
+    return render(request,'Smart_meter/sm_device_address.html')
 
 def brandandmanuf(request):
     form = BrandandManufacturerForm()
@@ -90,7 +124,6 @@ def brandandmanuf(request):
 def showbrandandmanuf(request):
     cd = Brand_and_Manufacturer.objects.all()
     return render(request, "showbrandandmanuf.html", {'result': cd})
-
 
 def about(request):
     return render(request, 'about.html')

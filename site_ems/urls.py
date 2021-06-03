@@ -40,7 +40,13 @@ urlpatterns = [
                   ### for smart meter
     url(r'addsmartmeter$',views.addsmartmeter,name='addsmartmeter'),
     url(r'showsmartmeter$',views.showsmartmeter,name='showsmartmeter'),
-    url(r'smartmeterport',views.smartmeterport,name='smartmeterport'),
+    url(r'addsmport',views.addsmport,name='addsmport'),
+    url(r'showsmport',views.showsmport,name='showsmport'),
+    url(r'sm_brand_n_manf',views.sm_brand_n_manf,name='sm_brand_n_manf'),
+    url(r'sm_overview_screen',views.sm_overview_screen,name='sm_overview_screen'),
+    url(r'sm_device_address',views.sm_device_address,name='sm_device_address'),
+    url(r'addsmlink',views.addsmlink,name='addsmlink'),
+    url(r'showsmlink',views.showsmlink,name='showsmlink'),
                 ### for brand and manufacturer
     url(r'brandandmanuf$', views.brandandmanuf, name='brandandmanuf'),
     url(r'showbrandandmanuf$', views.showbrandandmanuf, name='showbrandandmanuf'),
