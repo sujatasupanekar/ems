@@ -249,7 +249,11 @@ def editlocation(request, id):
     updated_on = obj.modifieddate
     print("obj in Edit location:",obj,id)
     cnm_list = Company.objects.all()
-    return render(request,'editlocation.html', {'cnm_list':cnm_list,'employee':obj,'updated_on':updated_on})
+    return render(request,'editlocation.html', {
+        'cnm_list':cnm_list,
+        'employee':obj,
+        'updated_on':updated_on
+    })
 
 def updatelocation(request, id):
     form = LocationForm()
