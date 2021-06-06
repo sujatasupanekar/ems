@@ -38,19 +38,27 @@ urlpatterns = [
     path('load-location/', views.load_location, name='load_location'), # AJAX
     path('roicalc',views.roicalc),
                   ### for smart meter
-    url(r'addsmartmeter$',views.addsmartmeter,name='addsmartmeter'),
-    url(r'showsmartmeter$',views.showsmartmeter,name='showsmartmeter'),
+    url(r'addsmscreen$',views.addsmscreen,name='addsmscreen'),
+    url(r'showsmscreen$',views.showsmscreen,name='showsmscreen'),
     url(r'addsmport',views.addsmport,name='addsmport'),
     url(r'showsmport',views.showsmport,name='showsmport'),
+    url(r'addsmlink', views.addsmlink, name='addsmlink'),
+    url(r'showsmlink', views.showsmlink, name='showsmlink'),
+    url(r'addsmoverview', views.addsmoverview, name='addsmoverview'),
+    url(r'showsmoverview',views.showsmoverview,name='showsmoverview'),
     url(r'sm_brand_n_manf',views.sm_brand_n_manf,name='sm_brand_n_manf'),
-    url(r'sm_overview_screen',views.sm_overview_screen,name='sm_overview_screen'),
     url(r'sm_device_address',views.sm_device_address,name='sm_device_address'),
-    url(r'addsmlink',views.addsmlink,name='addsmlink'),
-    url(r'showsmlink',views.showsmlink,name='showsmlink'),
                 ### for brand and manufacturer
     url(r'brandandmanuf$', views.brandandmanuf, name='brandandmanuf'),
     url(r'showbrandandmanuf$', views.showbrandandmanuf, name='showbrandandmanuf'),
-
+                ## Cost center
+    url(r'costarea',views.addcostarea,name='costarea'),
+    url(r'showcostarea',views.showcostarea,name='showcostarea'),
+    url(r'house',views.addhouse,name='house'),
+    url(r'showhouse',views.showhouse,name='showhouse'),
+    url(r'consumerobject',views.addconsumerobj,name='consumerobject'),
+    url(r'showconsumerobject',views.showconsumerobj,name='showconsumerobject'),
+            ### FOrgot password
     path(r'password_reset/done/', auth_views.PasswordResetDoneView.as_view(template_name='Forgot_password/password_reset_done.html'), name='password_reset_done'),
     path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name="Forgot_password/password_reset_confirm.html"), name='password_reset_confirm'),
 #    path(r'^reset/(?P<uidb36>[0-9A-Za-z]+)-(?P<token>.+)/$', auth_views.PasswordResetConfirmView.as_view(template_name="Forgot_password/password_reset_confirm.html"), name='password_reset_confirm'),

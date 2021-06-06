@@ -14,9 +14,10 @@ from django.contrib import messages
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.forms import PasswordResetForm
 from django.contrib.auth.models import User
-from .models import Company,Location,Consortium,Area,Smartmeter,SmartmeterPort,Brand_and_Manufacturer
+from .models import Company,Location,Consortium,Area,Smartmeter,SmartmeterPort,Brand_and_Manufacturer,Costarea
+from .models import Consumer,House
 from .forms import CompanyForm,LocationForm,AreaForm,SmartmeterForm,SmartmeterPortForm,BrandandManufacturerForm
-from .forms import SmartmeterLinkDeviceForm
+from .forms import SmartmeterLinkDeviceForm,CostareaForm,HouseForm,ConsumerForm
 import random
 
 # Create your views here.
@@ -32,7 +33,70 @@ def consumption_graph(request):
     print(randomlist)
     return render(request,'consumption_graph.html',{'data_set':randomlist})
 
-def addsmartmeter(request):
+def addcostarea(request):
+    if request.method == "POST":
+        form = CostareaForm(request.POST)
+        if form.is_valid():
+                Costarea = form.save(commit=False)
+                Costarea.createdby = request.user
+                Costarea.modifiedby = request.user
+                Costarea = Costarea.save()
+                print(" form is valid and in try block")
+                return redirect('Cost_center/showcostarea')
+    else:
+        print("in else part")
+        form = CostareaForm()
+    return render(request,'Cost_center/costarea.html',{'form':form})
+
+def showcostarea(request):
+    obj = Costarea.objects.all()
+    cnm_list = Company.objects.all()
+    lnm_list = Location.objects.all()
+    return render(request,'Cost_center/showcostarea.html',{'data':obj,'cnm_list':cnm_list,'lnm_list':lnm_list})
+
+def addhouse(request):
+    if request.method == "POST":
+        form = HouseForm(request.POST)
+        if form.is_valid():
+                House = form.save(commit=False)
+                House.createdby = request.user
+                House.modifiedby = request.user
+                House = House.save()
+                print(" form is valid and in try block")
+                return redirect('Cost_center/showhouse')
+    else:
+        print("in else part")
+        form = HouseForm()
+    return render(request,'Cost_center/house.html',{'form':form})
+
+def showhouse(request):
+    obj = House.objects.all()
+    cnm_list = Company.objects.all()
+    lnm_list = Location.objects.all()
+    return render(request,'Cost_center/showhouse.html',{'data':obj,'cnm_list':cnm_list,'lnm_list':lnm_list})
+
+def addconsumerobj(request):
+    if request.method == "POST":
+        form = ConsumerForm(request.POST)
+        if form.is_valid():
+                Consumer = form.save(commit=False)
+                Consumer.createdby = request.user
+                Consumer.modifiedby = request.user
+                Consumer = Consumer.save()
+                print(" form is valid and in try block")
+                return redirect('Cost_center/showconsumerobject')
+    else:
+        print("in else part")
+        form = ConsumerForm()
+    return render(request,'Cost_center/consumerobject.html',{'form':form})
+
+def showconsumerobj(request):
+    obj = Consumer.objects.all()
+    cnm_list = Company.objects.all()
+    lnm_list = Location.objects.all()
+    return render(request,'Cost_center/showconsumerobject.html',{'data':obj,'cnm_list':cnm_list,'lnm_list':lnm_list})
+
+def addsmscreen(request):
     if request.method == "POST":
         form = SmartmeterForm(request.POST)
         if form.is_valid():
@@ -41,15 +105,15 @@ def addsmartmeter(request):
                 Smartmeter.modifiedby = request.user
                 Smartmeter = Smartmeter.save()
                 print(" form is valid and in try block")
-                return redirect('/showsmartmeter')
+                return redirect('Smart_meter/showsmscreen')
     else:
         print("in else part")
         form = SmartmeterForm()
-    return render(request,'Smart_meter/addsmartmeter.html',{'form':form})
+    return render(request,'Smart_meter/addsmscreen.html',{'form':form})
 
-def showsmartmeter(request):
+def showsmscreen(request):
     result = Smartmeter.objects.all()
-    return render(request, 'Smart_meter/showsmartmeter.html', {'result': result})
+    return render(request, 'Smart_meter/showsmscreen.html', {'result': result})
 
 def addsmport(request):
     form = SmartmeterPortForm()
@@ -79,8 +143,6 @@ def editsmartmeter(request, id):
 def addsmlink(request):
     form = SmartmeterLinkDeviceForm()
     if request.method == "POST":
-        form = SmartmeterLinkDeviceForm(request.POST)
-        if form.is_valid():
                 # = form.save(commit=False)
                 #SmartmeterPort.createdby = request.user
                 #SmartmeterPort.modifiedby = request.user
@@ -99,8 +161,23 @@ def showsmlink(request):
 def sm_brand_n_manf(request):
     return render(request,'Smart_meter/sm_brand_n_manf.html')
 
-def sm_overview_screen(request):
-    return render(request,'Smart_meter/sm_overview_screen.html')
+def addsmoverview(request):
+    if request.method == "POST":
+        form = SmartmeterForm(request.POST)
+        if form.is_valid():
+                Smartmeter = form.save(commit=False)
+                Smartmeter.createdby = request.user
+                Smartmeter.modifiedby = request.user
+                Smartmeter = Smartmeter.save()
+                print(" form is valid and in try block")
+                return redirect('Smart_meter/showsmoverview')
+    else:
+        print("in else part")
+        form = SmartmeterForm()
+    return render(request,'Smart_meter/addsmoverview.html',{'form':form})
+
+def showsmoverview(request):
+    return render(request,'Smart_meter/showsmoverview.html')
 
 def sm_device_address(request):
     return render(request,'Smart_meter/sm_device_address.html')

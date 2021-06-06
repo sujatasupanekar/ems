@@ -1,0 +1,50 @@
+{% extends 'main_content.html' %}
+{% load static %}
+
+{% block main_content_header %}
+    House Details
+{% endblock %}
+
+{% block main_content %}
+<form class="main-content-form">
+   {% csrf_token %}
+   <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Company</label>
+            <div class="col-sm-4">
+                 <select id="company" name="company">
+                        {% for c in cnm_list %}
+                            <option value="{{c}}">{{c}}</option>
+                        {% endfor %}
+                 </select>
+            </div>
+   </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Location</label>
+            <div class="col-sm-4">
+                <select id="location" name="location">
+                      {% for l in lnm_list %}
+                          <option value="{{l}}">{{l}}</option>
+                      {% endfor %}
+                </select>
+            </div>
+   </div>
+   <table class="table table-striped">
+       		<tr>
+                    <th>Building name/number</th>
+                	<th>Cost area</th>
+                	<th>Address</th>
+                    <th>Floor</th>
+                    <th>Tax applicable</th>
+            </tr>
+            {% for r in data %}
+                <tr>
+                    <td>{{ r.house_id }}</td>
+                    <td>{{r.cost_area}}</td>
+                    <td>{{r.street1}}</td>
+                    <td>{{r.floors_end_to}}</td>
+                    <td>{{r.tax_marker}}</td>
+                </tr>
+            {% endfor %}
+      </table>
+    </form>
+{% endblock %}

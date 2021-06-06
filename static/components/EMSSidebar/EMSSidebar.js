@@ -68,7 +68,7 @@ class EMSSidebar extends HTMLElement {
                 </button>
               </h2>
               <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#accordionExample">
-                    <div class="accordion-body"><div><a href="/addsmartmeter" class="opt-a"><span class="panel-dropdown-text">In Progress</span></a></div></div>
+                    <div class="accordion-body"><div><a href="/addsmscreen" class="opt-a"><span class="panel-dropdown-text">Smart meter</span></a></div></div>
               </div>
             </div>
 
@@ -104,7 +104,9 @@ class EMSSidebar extends HTMLElement {
                 </button>
               </h2>
               <div id="collapseEight" class="accordion-collapse collapse" aria-labelledby="headingEight" data-bs-parent="#accordionExample">
-                    <div class="accordion-body"><div><a href="/cmp" class="opt-a"><span class="panel-dropdown-text">Under Construction</span></a></div></div>
+                    <div class="accordion-body"><div><a href="/costarea" class="opt-a"><span class="panel-dropdown-text">Cost area</span></a></div></div>
+                    <div class="accordion-body"><div><a href="/house" class="opt-a"><span class="panel-dropdown-text">House</span></a></div></div>
+                    <div class="accordion-body"><div><a href="/consumerobject" class="opt-a"><span class="panel-dropdown-text">Consumer object</span></a></div></div>
               </div>
             </div>
 

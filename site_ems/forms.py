@@ -1,5 +1,6 @@
 from django import forms
-from .models import Company,Location,Area,Smartmeter,SmartmeterPort,Brand_and_Manufacturer
+from .models import Company,Location,Area,Smartmeter,SmartmeterPort,Brand_and_Manufacturer,Costarea
+from .models import Consumer,House
 
 class CompanyForm(forms.ModelForm):
     class Meta:
@@ -31,6 +32,32 @@ class AreaForm(forms.ModelForm):
     class Meta:
         model = Area
         fields =['company','location','area','area_logo']
+
+class CostareaForm(forms.ModelForm):
+    company = forms.ModelChoiceField(queryset=Company.objects.all(), initial=0, required=False)
+    location = forms.ModelChoiceField(queryset=Location.objects.all(), initial=0, required=False)
+
+    class Meta:
+        model = Costarea
+        fields = ['company', 'location', 'cost_area']
+
+class HouseForm(forms.ModelForm):
+    company = forms.ModelChoiceField(queryset=Company.objects.all(), initial=0, required=False)
+    location = forms.ModelChoiceField(queryset=Location.objects.all(), initial=0, required=False)
+
+    class Meta:
+        model = House
+        fields = ['company', 'location', 'costarea_id','house_name','street1','street2','city',
+                  'zipcode','state','country','floors_start_from','floors_end_to','remarks','tax_marker']
+
+class ConsumerForm(forms.ModelForm):
+    company = forms.ModelChoiceField(queryset=Company.objects.all(), initial=0, required=False)
+    location = forms.ModelChoiceField(queryset=Location.objects.all(), initial=0, required=False)
+
+    class Meta:
+        model = Consumer
+        fields = ['consumer_name','company', 'location', 'area','house','floor_no']
+
 
 class SmartmeterForm(forms.ModelForm):
     company = forms.ModelChoiceField(queryset=Company.objects.all(), initial=0)

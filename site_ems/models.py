@@ -118,8 +118,8 @@ class Area(models.Model):
     modifiedby = models.CharField(max_length=50, default=None)
     modifieddate = models.DateTimeField(auto_now=True, null=True, blank=True)
 
-    #def __str__(self):
-    #    return (self.company + self.location + self.area)
+    def __str__(self):
+        return self.area
 
 class Consumption05(models.Model):
     channel_id = models.IntegerField(primary_key=True)
@@ -424,15 +424,116 @@ class Consumption05(models.Model):
 
 class Costarea(models.Model):
     costarea_id = models.AutoField(primary_key=True)
-    company_id = models.IntegerField()
-    location_id = models.IntegerField()
+    company = models.ForeignKey(Company,on_delete=models.CASCADE,blank=True,null=True)
+    location = models.ForeignKey(Location,on_delete=models.CASCADE,blank=True,null=True)
     cost_area = models.CharField(max_length=50)
-    usable = models.CharField(max_length=1)
-    image_id = models.IntegerField(blank=True, null=True)
+    #usable = models.CharField(max_length=1)
+    #image_id = models.IntegerField(blank=True, null=True)
     createdby = models.CharField(max_length=50, default=None)
     createddate = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     modifiedby = models.CharField(max_length=50, default=None)
     modifieddate = models.DateTimeField(auto_now=True, null=True, blank=True)
+
+class Provider(models.Model):
+    provider_id = models.AutoField(primary_key=True)
+    short_name = models.CharField(max_length=10, blank=True, null=True)
+    provider_name1 = models.CharField(max_length=30, blank=True, null=True)
+    provider_name2 = models.CharField(max_length=30, blank=True, null=True)
+    street = models.TextField(blank=True, null=True)
+    country_code = models.CharField(max_length=3, blank=True, null=True)
+    zip_code = models.CharField(max_length=6, blank=True, null=True)
+    town = models.CharField(max_length=20, blank=True, null=True)
+    country = models.CharField(max_length=30, blank=True, null=True)
+    contact_person = models.CharField(max_length=30, blank=True, null=True)
+    email = models.CharField(max_length=40, blank=True, null=True)
+    tel_no = models.CharField(max_length=15, blank=True, null=True)
+    fax_no = models.CharField(max_length=15, blank=True, null=True)
+    energy_id = models.IntegerField(blank=True, null=True)
+    url = models.CharField(max_length=100, blank=True, null=True)
+    free_client = models.CharField(max_length=1, blank=True, null=True)
+    rounding_flag = models.IntegerField()
+    createdby = models.CharField(max_length=50, blank=True, null=True)
+    createddate = models.DateTimeField(blank=True, null=True)
+    modifiedby = models.CharField(max_length=50, blank=True, null=True)
+    modifieddate = models.DateTimeField(blank=True, null=True)
+
+class House(models.Model):
+    company = models.ForeignKey(Company,on_delete=models.CASCADE)
+    location = models.ForeignKey(Location,on_delete=models.CASCADE)
+    house_id = models.AutoField(primary_key=True)
+    house_name = models.CharField(max_length=50)
+    costarea_id = models.ForeignKey(Costarea,on_delete=models.CASCADE)
+    floors_start_from = models.IntegerField()
+    floors_end_to = models.IntegerField()
+    remarks = models.CharField(max_length=120, blank=True, null=True)
+    contact_id = models.IntegerField(blank=True, null=True)
+    tax_marker = models.CharField(max_length=1)
+    provider_id = models.ForeignKey(Provider,on_delete=models.CASCADE)
+    house_logo = models.IntegerField(blank=True, null=True)
+    #usable = models.CharField(max_length=1)
+    createdby = models.CharField(max_length=10)
+    createddate = models.DateTimeField(blank=True, null=True)
+    modifiedby = models.CharField(max_length=10)
+    modifieddate = models.DateTimeField(blank=True, null=True)
+    wing = models.CharField(max_length=20)
+    street1 = models.TextField(blank=True, null=True)
+    street2 = models.TextField(blank=True, null=True)
+    city = models.CharField(max_length=20, blank=True, null=True)
+    state = models.CharField(max_length=20, blank=True, null=True)
+    country = models.CharField(max_length=20, blank=True, null=True)
+    zipcode = models.CharField(max_length=20, blank=True, null=True)
+
+class Consumer(models.Model):
+    consumer_id = models.AutoField(primary_key=True)
+    company = models.ForeignKey(Company, on_delete=models.CASCADE)
+    location = models.ForeignKey(Location, on_delete=models.CASCADE)
+    consumer_logo = models.IntegerField()
+    area = models.ForeignKey(Area,on_delete=models.CASCADE)
+    house = models.ForeignKey(House,on_delete=models.CASCADE)
+    wing = models.CharField(max_length=20)
+    floor_no = models.CharField(max_length=5)
+    customergroup_no = models.IntegerField()
+    ismeterallocated = models.CharField(max_length=1)
+    isaddressallocated = models.CharField(max_length=1)
+    flat_no = models.CharField(max_length=10)
+    consumer_name = models.CharField(max_length=30)
+    #usable = models.CharField(max_length=1)
+    createdby = models.CharField(max_length=10, blank=True, null=True)
+    createddate = models.DateTimeField(blank=True, null=True)
+    modifiedby = models.CharField(max_length=10, blank=True, null=True)
+    modifieddate = models.DateTimeField(blank=True, null=True)
+
+class ConsumerAddress(models.Model):
+    consumer_address_id = models.AutoField(primary_key=True)
+    consumer_id = models.ForeignKey(Consumer,on_delete=models.CASCADE)
+    ownership = models.CharField(max_length=1)
+    name = models.CharField(max_length=25)
+    address = models.CharField(max_length=50)
+    occupied_from = models.DateTimeField()
+    occupied_till = models.DateTimeField()
+    type = models.IntegerField()
+    split_percentage = models.IntegerField()
+    billing = models.CharField(max_length=1)
+    contact_id = models.IntegerField()
+
+class ConsumerMeterAllocation(models.Model):
+    meter_allocation_id = models.AutoField(primary_key=True)
+    consumer_id = models.ForeignKey(Consumer,on_delete=models.CASCADE)
+    meter_no = models.IntegerField()
+    #datalogger_id = models.IntegerField()
+    channel_id = models.IntegerField()
+    percentage = models.IntegerField()
+
+class ProviderAllocation(models.Model):
+    provider_allocation_id = models.AutoField(primary_key=True)
+    energytype_id = models.IntegerField()
+    provider_id = models.ForeignKey(Provider,on_delete=models.CASCADE)
+    billingtype_id = models.IntegerField()
+    pricelist_id = models.IntegerField()
+    location_id = models.ForeignKey(Location,on_delete=models.CASCADE)
+    costarea_id = models.ForeignKey(Costarea,on_delete=models.CASCADE)
+    house_id = models.ForeignKey(House,on_delete=models.CASCADE)
+    consumer_id = models.ForeignKey(Consumer,on_delete=models.CASCADE)
 
 class Smartmeter(models.Model):
     company = models.ForeignKey(Company, on_delete=models.CASCADE, null=True)
@@ -473,7 +574,6 @@ class Smartmeter(models.Model):
     reading_type = models.CharField(max_length=7,default=None)
     #pcclient_id = models.IntegerField(blank=True,null=True)
     #contentright = models.CharField(max_length=1, blank=True, null=True)
-
 
 class SmartmeterPort(models.Model):
     port_type_choices = [('RS232', 'RS232'), ('RS485', 'RS485'), ('Network', 'Network')]

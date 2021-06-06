@@ -1,0 +1,69 @@
+{% extends 'main_content.html' %}
+{% load static %}
+
+{% block main_content_header %}
+    SM Brand and Manufacturer Details
+{% endblock %}
+
+{% block main_content %}
+<form class="main-content-form">
+        {% csrf_token %}
+   <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Location</label>
+            <div class="col-sm-4">
+                <select id="location" name="location">
+                      {% for l in lnm %}
+                          <option value="{{l}}">{{l}}</option>
+                      {% endfor %}
+                </select>
+            </div>
+   </div>
+   <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Brand</label>
+            <div class="col-sm-4">
+                 <select id="brand" name="brand">
+                        {% for l in bnm %}
+                            <option value="{{l}}">{{l}}</option>
+                        {% endfor %}
+                 </select>
+            </div>
+   </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Area</label>
+            <div class="col-sm-4">
+                <select id="area" name="area">
+                      {% for l in areanm %}
+                          <option value="{{l}}">{{l}}</option>
+                      {% endfor %}
+                </select>
+            </div>
+   </div>
+   <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Model</label>
+            <div class="col-sm-4">
+                 <select id="modelnm" name="modelnm">
+                        {% for l in modelnm %}
+                            <option value="{{l}}">{{l}}</option>
+                        {% endfor %}
+                 </select>
+            </div>
+   </div>
+
+    <table class="table table-striped">
+       		<tr>
+                    <th>Name</th>
+                	<th>Location</th>
+                	<th>Area</th>
+                	<th>Brand</th>
+                    <th>Model</th>
+                	<th>Manufacturer</th>
+                	<th>Description</th>
+           		</tr>
+                {% for r in data %}
+                <tr>
+    		         <td style="text-align:center">{{ r }}</td>
+                </tr>
+                {% endfor %}
+              </table>
+    </form>
+{% endblock %}

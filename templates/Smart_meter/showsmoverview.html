@@ -1,0 +1,45 @@
+{% extends 'main_content.html' %}
+{% load static %}
+
+{% block main_content_header %}
+    SM Overview
+{% endblock %}
+
+{% block main_content %}
+<form class="main-content-form">
+        {% csrf_token %}
+     <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Brand</label>
+            <div class="col-sm-4">
+            <select id="brand" name="brand">
+              {% for l in bnm %}
+              <option value="{{l}}">{{l}}</option>
+              {% endfor %}
+            </select>
+            </div>
+     </div>
+     <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Manufacuturer</label>
+            <div class="col-sm-4">
+            <select id="manuf" name="manuf">
+              {% for l in manufnm %}
+              <option value="{{l}}">{{l}}</option>
+              {% endfor %}
+            </select>
+            </div>
+     </div>
+     <table>
+                <tr>
+                    <th>Brand</th>
+                    <th>Model</th>
+                    <th>Manufacturer</th>
+                	<th>Description</th>
+           		</tr>
+                {% for r in data %}
+                <tr>
+                    <td>{{ r.nm }}</td>
+                    <td>{{r.location}}</td>
+                    <td>{{r.area}}</td>
+                </tr>
+                {% endfor %}
+{% endblock %}
