@@ -12,22 +12,22 @@
           <table class="table table-striped">
             <thead>
             <tr>
-            <th>ID</th>
+            <th hidden>ID</th>
             <th>Company</th>
             <th>Location</th>
             <th>Area</th>
-            <th>Area logo</th>
+            <th hidden>Area logo</th>
             <th>Actions</th>
             </tr>
             </thead>
             <tbody>
             {% for i in result %}
               <tr>
-                <td>{{i.area_id}}</td>
+                <td hidden>{{i.area_id}}</td>
                 <td>{{i.company}}</td>
                 <td>{{i.location}}</td>
                 <td>{{i.area}}</td>
-                <td>{{i.area_logo}}</td>
+                <td hidden>{{i.area_logo}}</td>
                 <td>
                     <a href="/editarea/{{ i.area_id }}"><span class="glyphicon glyphicon-pencil" >Update</span></a>
                     <a href="/deletearea/{{ i.area_id }}">Delete</a>
