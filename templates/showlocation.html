@@ -12,7 +12,7 @@
           <table class="table table-striped ems-table">
             <thead>
             <tr>
-            <th>ID</th>
+            <th hidden>ID</th>
             <th>Short name</th>
             <th>Description</th>
             <th>Street</th>
@@ -23,7 +23,7 @@
             <tbody>
             {% for i in result %}
             <tr>
-              <td>{{ i.location_id }}</td>
+              <td hidden>{{ i.location_id }}</td>
               <td>{{ i.short_name }}</td>
               <td>{{ i.description }}</td>
               <td>{{ i.street }}</td>

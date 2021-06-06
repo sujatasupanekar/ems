@@ -9,10 +9,10 @@
 {% block main_content %}
     <form class="main-content-form">
         {% csrf_token %}
-          <table class="table table-striped">
+          <table class="table table-striped ems-table">
             <thead>
             <tr>
-            <th>CID</th>
+            <th hidden>CID</th>
             <th>Short name</th>
             <th>Company name</th>
             <th>Street</th>
@@ -32,7 +32,7 @@
             <tbody>
             {% for i in cd %}
               <tr>
-                <td>{{i.company_id}}</td>
+                <td hidden>{{i.company_id}}</td>
                 <td>{{i.short_name}}</td>
                 <td>{{i.company_name1}}</td>
                 <td>{{i.street}}</td>
