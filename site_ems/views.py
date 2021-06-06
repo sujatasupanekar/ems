@@ -387,8 +387,8 @@ def load_location(request):
 def editarea(request, id):
     obj = Area.objects.get(area_id=id)
     print("obj:", obj)
-    cnm_list = get_company_list()
-    #cnm_list = Company.objects.all()
+    #cnm_list = get_company_list()
+    cnm_list = Company.objects.all()
     lnm_list = Location.objects.all()
     updated_on = obj.modifieddate
     print("cnm_list:",cnm_list)
