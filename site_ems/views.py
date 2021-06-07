@@ -376,7 +376,8 @@ def addarea(request):
 
 def showarea(request):
     result = Area.objects.all()
-    return render(request, 'showarea.html',{'result':result})
+    lnm_list = Location.objects.all()
+    return render(request, 'showarea.html',{'result':result, 'lnm_list': lnm_list})
 
 def load_location(request):
     company_id = request.GET.get('company_id')

@@ -8,8 +8,27 @@
 
 {% block main_content %}
     <form class="main-content-form">
+
         {% csrf_token %}
-          <table class="table table-striped ems-table">
+
+          <div class="form-group row">
+            <label class="col-sm-6 col-form-label">Filer Records by Location:</label>
+            <div class="col-sm-4" style="margin-top: 5px;">
+                <select class="location_list_dropdown" name="location" required>
+                    {% for lnm in lnm_list %}
+                        <option 
+                        value="{{lnm.location_id}}"
+                        {% if lnm.location_id ==  employee.location_id %}
+                            selected="selected"
+                        {% endif %}>
+                    {{lnm.short_name}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+          </div>
+          <br>
+
+          <table class="table table-striped ems-table showarea_table">
             <thead>
             <tr>
             <th hidden>ID</th>
@@ -17,17 +36,19 @@
             <th>Location</th>
             <th>Area</th>
             <th hidden>Area logo</th>
+            <th hidden>location id</th>
             <th>Actions</th>
             </tr>
             </thead>
             <tbody>
             {% for i in result %}
-              <tr>
+              <tr class="area_location_filter">
                 <td hidden>{{i.area_id}}</td>
                 <td>{{i.company}}</td>
                 <td>{{i.location}}</td>
                 <td>{{i.area}}</td>
                 <td hidden>{{i.area_logo}}</td>
+                <td hidden >{{i.location_id}}</td>
                 <td>
                     <a href="/editarea/{{ i.area_id }}"><span class="glyphicon glyphicon-pencil" >Update</span></a>
                     <a href="/deletearea/{{ i.area_id }}">Delete</a>
