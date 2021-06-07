@@ -15,6 +15,7 @@
             <label class="col-sm-6 col-form-label">Filer Records by Location:</label>
             <div class="col-sm-4" style="margin-top: 5px;">
                 <select class="location_list_dropdown" name="location" required>
+                  <option>--Select a Location--</option>
                     {% for lnm in lnm_list %}
                         <option 
                         value="{{lnm.location_id}}"
