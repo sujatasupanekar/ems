@@ -434,6 +434,9 @@ class Costarea(models.Model):
     modifiedby = models.CharField(max_length=50, default=None)
     modifieddate = models.DateTimeField(auto_now=True, null=True, blank=True)
 
+    def __str__(self):
+        return self.cost_area
+
 class Provider(models.Model):
     provider_id = models.AutoField(primary_key=True)
     short_name = models.CharField(max_length=10, blank=True, null=True)
@@ -457,7 +460,11 @@ class Provider(models.Model):
     modifiedby = models.CharField(max_length=50, blank=True, null=True)
     modifieddate = models.DateTimeField(blank=True, null=True)
 
+    def __str__(self):
+        return self.short_name
+
 class House(models.Model):
+    BOOL_CHOICES = (('True', 'Yes'), ('False', 'No'))
     company = models.ForeignKey(Company,on_delete=models.CASCADE)
     location = models.ForeignKey(Location,on_delete=models.CASCADE)
     house_id = models.AutoField(primary_key=True)
@@ -467,8 +474,8 @@ class House(models.Model):
     floors_end_to = models.IntegerField()
     remarks = models.CharField(max_length=120, blank=True, null=True)
     contact_id = models.IntegerField(blank=True, null=True)
-    tax_marker = models.CharField(max_length=1)
-    provider_id = models.ForeignKey(Provider,on_delete=models.CASCADE)
+    tax_marker = models.CharField(choices=BOOL_CHOICES,max_length=5)
+    provider = models.ForeignKey(Provider,on_delete=models.CASCADE,blank=True,null=True)
     house_logo = models.IntegerField(blank=True, null=True)
     #usable = models.CharField(max_length=1)
     createdby = models.CharField(max_length=10)
@@ -476,12 +483,15 @@ class House(models.Model):
     modifiedby = models.CharField(max_length=10)
     modifieddate = models.DateTimeField(blank=True, null=True)
     wing = models.CharField(max_length=20)
-    street1 = models.TextField(blank=True, null=True)
-    street2 = models.TextField(blank=True, null=True)
+    street1 = models.CharField(max_length=200,blank=True, null=True)
+    street2 = models.CharField(max_length=200,blank=True, null=True)
     city = models.CharField(max_length=20, blank=True, null=True)
     state = models.CharField(max_length=20, blank=True, null=True)
     country = models.CharField(max_length=20, blank=True, null=True)
     zipcode = models.CharField(max_length=20, blank=True, null=True)
+
+    def __str__(self):
+        return self.house_name
 
 class Consumer(models.Model):
     consumer_id = models.AutoField(primary_key=True)
@@ -502,6 +512,9 @@ class Consumer(models.Model):
     createddate = models.DateTimeField(blank=True, null=True)
     modifiedby = models.CharField(max_length=10, blank=True, null=True)
     modifieddate = models.DateTimeField(blank=True, null=True)
+
+    def __str__(self):
+        return self.consumer_name
 
 class ConsumerAddress(models.Model):
     consumer_address_id = models.AutoField(primary_key=True)

@@ -19,11 +19,9 @@ class LocationForm(forms.ModelForm):
         model = Location
         fields = ['company','short_name','description','street','town','zip_code','country','contact_person',
                   'email','tel_no','fax_no','location_logo']
-
         widget = {
             'country': forms.TextInput(attrs={'class': 'form-control'})
         }
-
 
 class AreaForm(forms.ModelForm):
     company = forms.ModelChoiceField(queryset=Company.objects.all(),initial=0,required=False)
@@ -41,14 +39,16 @@ class CostareaForm(forms.ModelForm):
         model = Costarea
         fields = ['company', 'location', 'cost_area']
 
+BOOL_CHOICES = ((True, 'Yes'), (False, 'No'))
 class HouseForm(forms.ModelForm):
     company = forms.ModelChoiceField(queryset=Company.objects.all(), initial=0, required=False)
     location = forms.ModelChoiceField(queryset=Location.objects.all(), initial=0, required=False)
+    tax_marker = forms.ChoiceField(choices=BOOL_CHOICES,widget=forms.RadioSelect())
 
     class Meta:
         model = House
         fields = ['company', 'location', 'costarea_id','house_name','street1','street2','city',
-                  'zipcode','state','country','floors_start_from','floors_end_to','remarks','tax_marker']
+                  'zipcode','state','country','provider','floors_start_from','floors_end_to','remarks','tax_marker']
 
 class ConsumerForm(forms.ModelForm):
     company = forms.ModelChoiceField(queryset=Company.objects.all(), initial=0, required=False)
@@ -57,7 +57,6 @@ class ConsumerForm(forms.ModelForm):
     class Meta:
         model = Consumer
         fields = ['consumer_name','company', 'location', 'area','house','floor_no']
-
 
 class SmartmeterForm(forms.ModelForm):
     company = forms.ModelChoiceField(queryset=Company.objects.all(), initial=0)

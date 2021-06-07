@@ -13,6 +13,7 @@
             <thead>
             <tr>
             <th hidden>ID</th>
+            <th>Company</th>
             <th>Short name</th>
             <th>Description</th>
             <th>Street</th>
@@ -24,6 +25,7 @@
             {% for i in result %}
             <tr>
               <td hidden>{{ i.location_id }}</td>
+              <td>{{ i.company}}</td>
               <td>{{ i.short_name }}</td>
               <td>{{ i.description }}</td>
               <td>{{ i.street }}</td>
