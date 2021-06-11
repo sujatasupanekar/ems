@@ -2,18 +2,18 @@
 {% load static %}
 
 {% block main_content_header %}
-    Enter Cost area details
+    Enter Invoice details
 {% endblock %}
 
 {% block main_content %}
-    <form class="main-content-form" action="Cost_center/costarea" method="POST">
+    <form class="main-content-form" action="Cost_center/invoice" method="POST">
         {% csrf_token %}
         <table>
             {{form}}
         </table>
 
-        <button type="submit" class="btn btn-primary ems-button">Add New Cost area</button>
-       
+<!--        <button type="submit" class="btn btn-primary ems-button">Add New house</button>   -->
+
     </form>
 {% endblock %}
 

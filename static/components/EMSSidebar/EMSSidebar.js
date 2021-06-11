@@ -104,9 +104,11 @@ class EMSSidebar extends HTMLElement {
                 </button>
               </h2>
               <div id="collapseEight" class="accordion-collapse collapse" aria-labelledby="headingEight" data-bs-parent="#accordionExample">
-                    <div class="accordion-body"><div><a href="/costarea" class="opt-a"><span class="panel-dropdown-text">Cost area</span></a></div></div>
-                    <div class="accordion-body"><div><a href="/house" class="opt-a"><span class="panel-dropdown-text">House</span></a></div></div>
-                    <div class="accordion-body"><div><a href="/consumerobject" class="opt-a"><span class="panel-dropdown-text">Consumer object</span></a></div></div>
+                    <div class="accordion-body"><div><a href="Cost_center/costarea" class="opt-a"><span class="panel-dropdown-text">Cost area</span></a></div></div>
+                    <div class="accordion-body"><div><a href="Cost_center/house" class="opt-a"><span class="panel-dropdown-text">House</span></a></div></div>
+                    <div class="accordion-body"><div><a href="Cost_center/consumerobject" class="opt-a"><span class="panel-dropdown-text">Consumer object</span></a></div></div>
+                    <div class="accordion-body"><div><a href="Cost_center/invoice" class="opt-a"><span class="panel-dropdown-text">Invoice</span></a></div></div>
+                    <div class="accordion-body"><div><a href="Cost_center/invoice_details" class="opt-a"><span class="panel-dropdown-text">Invoice details</span></a></div></div>
               </div>
             </div>
 

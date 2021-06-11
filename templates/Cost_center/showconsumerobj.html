@@ -29,20 +29,20 @@
             </div>
    </div>
     <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Company</label>
+        <label class="col-sm-2 col-form-label">Cost area</label>
             <div class="col-sm-4">
-                 <select id="company" name="company">
-                        {% for c in cnm_list %}
+                 <select id="cost_area" name="cost_area">
+                        {% for c in ca_list %}
                             <option value="{{c}}">{{c}}</option>
                         {% endfor %}
                  </select>
             </div>
    </div>
     <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Location</label>
+        <label class="col-sm-2 col-form-label">House</label>
             <div class="col-sm-4">
-                <select id="location" name="location">
-                      {% for l in lnm_list %}
+                <select id="house_list" name="house_list">
+                      {% for l in house_list %}
                           <option value="{{l}}">{{l}}</option>
                       {% endfor %}
                 </select>
@@ -60,11 +60,11 @@
             </tr>
             {% for r in data %}
                 <tr>
-                    <td>{{ r.consumer_nsme }}</td>
+                    <td>{{ r.consumer_name }}</td>
                     <td>{{ r.company }}</td>
                     <td>{{r.location}}</td>
                     <td>{{r.cost_area}}</td>
-                    <td>{{r.house_id}}</td>
+                    <td>{{r.house}}</td>
                     <td>{{r.ismeterallocated}}</td>
                     <td>{{r.isaddressallocated}}</td>
                 </tr>

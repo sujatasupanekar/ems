@@ -52,12 +52,15 @@ urlpatterns = [
     url(r'brandandmanuf$', views.brandandmanuf, name='brandandmanuf'),
     url(r'showbrandandmanuf$', views.showbrandandmanuf, name='showbrandandmanuf'),
                 ## Cost center
-    url(r'costarea',views.addcostarea,name='costarea'),
-    url(r'showcostarea',views.showcostarea,name='showcostarea'),
-    url(r'house',views.addhouse,name='house'),
-    url(r'showhouse',views.showhouse,name='showhouse'),
-    url(r'consumerobject',views.addconsumerobj,name='consumerobject'),
-    url(r'showconsumerobject',views.showconsumerobj,name='showconsumerobject'),
+    url(r'Cost_center/costarea',views.addcostarea,name='Cost_center/costarea'),
+    url(r'Cost_center/showcostarea',views.showcostarea,name='Cost_center/showcostarea'),
+    url(r'Cost_center/house',views.addhouse,name='Cost_center/house'),
+    url(r'Cost_center/showhouse',views.showhouse,name='Cost_center/showhouse'),
+    url(r'Cost_center/consumerobject',views.addconsumerobj,name='Cost_center/consumerobject'),
+    url(r'Cost_center/showconsumerobj',views.showconsumerobj,name='Cost_center/showconsumerobj'),
+    url(r'Cost_center/invoice',views.invoice,name='Cost_center/invoice'),
+    url(r'Cost_center/showinvoice',views.showinvoice,name='Cost_center/showinvoice'),
+
             ### FOrgot password
     path(r'password_reset/done/', auth_views.PasswordResetDoneView.as_view(template_name='Forgot_password/password_reset_done.html'), name='password_reset_done'),
     path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name="Forgot_password/password_reset_confirm.html"), name='password_reset_confirm'),

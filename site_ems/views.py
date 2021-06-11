@@ -15,9 +15,9 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.forms import PasswordResetForm
 from django.contrib.auth.models import User
 from .models import Company,Location,Consortium,Area,Smartmeter,SmartmeterPort,Brand_and_Manufacturer,Costarea
-from .models import Consumer,House
+from .models import Consumer,House,InvoiceCostarea
 from .forms import CompanyForm,LocationForm,AreaForm,SmartmeterForm,SmartmeterPortForm,BrandandManufacturerForm
-from .forms import SmartmeterLinkDeviceForm,CostareaForm,HouseForm,ConsumerForm
+from .forms import SmartmeterLinkDeviceForm,CostareaForm,HouseForm,ConsumerForm,InvoiceForm
 import random
 
 # Create your views here.
@@ -84,7 +84,7 @@ def addconsumerobj(request):
                 Consumer.modifiedby = request.user
                 Consumer = Consumer.save()
                 print(" form is valid and in try block")
-                return redirect('Cost_center/showconsumerobject')
+                return redirect('Cost_center/showconsumerobj')
     else:
         print("in else part")
         form = ConsumerForm()
@@ -94,7 +94,30 @@ def showconsumerobj(request):
     obj = Consumer.objects.all()
     cnm_list = Company.objects.all()
     lnm_list = Location.objects.all()
-    return render(request,'Cost_center/showconsumerobject.html',{'data':obj,'cnm_list':cnm_list,'lnm_list':lnm_list})
+    ca_list = Costarea.objects.all()
+    house_list = House.objects.all()
+    return render(request,'Cost_center/showconsumerobj.html',{'data':obj,'cnm_list':cnm_list,
+                           'lnm_list':lnm_list,'ca_list':ca_list,'house_list':house_list})
+
+def invoice(request):
+    if request.method == "POST":
+        form = InvoiceForm(request.POST)
+        if form.is_valid():
+                InvoiceCostarea = form.save(commit=False)
+                InvoiceCostarea.createdby = request.user
+                InvoiceCostarea.modifiedby = request.user
+                InvoiceCostarea = InvoiceCostarea.save()
+                print(" form is valid and in try block")
+                return redirect('Cost_center/showinvoice')
+    else:
+        print("in else part")
+        form = InvoiceForm()
+    return render(request,'Cost_center/invoice.html',{'form':form})
+
+def showinvoice(request):
+    #consumer_nm = InvoiceCostarea.objects.filter()
+    return render(request,'Cost_center/showinvoice.html')
+
 
 def addsmscreen(request):
     if request.method == "POST":
@@ -362,6 +385,7 @@ def get_location_list():
 def addarea(request):
     if request.method == "POST":
         form = AreaForm(request.POST)
+
         if form.is_valid():
             Area = form.save(commit=False)
             Area.createdby = request.user
@@ -372,6 +396,7 @@ def addarea(request):
     else:
         print("in else part")
         form = AreaForm()
+
     return render(request, 'addarea.html', {'form': form})
 
 def showarea(request):

@@ -1,7 +1,8 @@
 from django.contrib import admin
 from .models import Company,Consortium,Location,Area
-from .models import SmartmeterPort,Smartmeter,Brand_and_Manufacturer
-from .models import Consumption05,Costarea,Provider,ProviderAllocation
+from .models import SmartmeterPort,Smartmeter,Brand_and_Manufacturer,InvoiceCostarea,PriceList
+from .models import Consumption05,Costarea,Provider,ProviderAllocation,House,Energy,EnergyParameter
+from .models import Tariff,TariffTime,TariffLoadUnit,TariffLoadSlabs,TariffConsumptionSlabs
 
 # Register your models here.
 class displayTimestamp(admin.ModelAdmin):
@@ -18,3 +19,9 @@ admin.site.register(Consumption05)
 admin.site.register(Costarea)
 admin.site.register(Provider)
 admin.site.register(ProviderAllocation)
+admin.site.register(House)
+admin.site.register(Energy)
+admin.site.register(EnergyParameter)
+admin.site.register(PriceList)
+admin.site.register(Tariff)
+admin.site.register(TariffTime)

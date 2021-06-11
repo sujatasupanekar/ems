@@ -1,6 +1,6 @@
 from django import forms
 from .models import Company,Location,Area,Smartmeter,SmartmeterPort,Brand_and_Manufacturer,Costarea
-from .models import Consumer,House
+from .models import Consumer,House,InvoiceCostarea,Provider
 
 class CompanyForm(forms.ModelForm):
     class Meta:
@@ -44,10 +44,10 @@ class HouseForm(forms.ModelForm):
     company = forms.ModelChoiceField(queryset=Company.objects.all(), initial=0, required=False)
     location = forms.ModelChoiceField(queryset=Location.objects.all(), initial=0, required=False)
     tax_marker = forms.ChoiceField(choices=BOOL_CHOICES,widget=forms.RadioSelect())
-
+    cost_area = forms.ModelChoiceField(queryset=Costarea.objects.all(),initial=0,required=False)
     class Meta:
         model = House
-        fields = ['company', 'location', 'costarea_id','house_name','street1','street2','city',
+        fields = ['company', 'location', 'cost_area','house_name','street1','street2','city',
                   'zipcode','state','country','provider','floors_start_from','floors_end_to','remarks','tax_marker']
 
 class ConsumerForm(forms.ModelForm):
@@ -56,7 +56,26 @@ class ConsumerForm(forms.ModelForm):
 
     class Meta:
         model = Consumer
-        fields = ['consumer_name','company', 'location', 'area','house','floor_no']
+        fields = ['consumer_name','company', 'location', 'cost_area','house','floor_no']
+
+class ProviderForm(forms.ModelForm):
+    class Meta:
+        model = Provider
+        fields = ['short_name','provider_name1', 'provider_name2', 'street','country','zip_code',
+                  'town','contact_person','tel_no','fax_no','energy','url','free_client','rounding_flag']
+
+class InvoiceForm(forms.ModelForm):
+    company = forms.ModelChoiceField(queryset=Company.objects.all(), initial=0, required=False)
+    location = forms.ModelChoiceField(queryset=Location.objects.all(), initial=0, required=False)
+    cost_area = forms.ModelChoiceField(queryset=Costarea.objects.all(), initial=0, required=False)
+    house = forms.ModelChoiceField(queryset=House.objects.all(), initial=0, required=False)
+    consumer = forms.ModelChoiceField(queryset=Consumer.objects.all(), initial=0, required=False)
+    start_date = forms.DateField()
+    end_date = forms.DateField()
+    class Meta:
+        model = InvoiceCostarea
+        fields = ['company', 'location', 'cost_area', 'house', 'consumer','start_date','end_date']
+
 
 class SmartmeterForm(forms.ModelForm):
     company = forms.ModelChoiceField(queryset=Company.objects.all(), initial=0)

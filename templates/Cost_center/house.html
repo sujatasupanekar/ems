@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block main_content %}
-    <form class="main-content-form" action="addhouse" method="POST">
+    <form class="main-content-form" action="Cost_center/house" method="POST">
         {% csrf_token %}
         <table>
             {{form}}
