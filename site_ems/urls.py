@@ -60,6 +60,8 @@ urlpatterns = [
     url(r'Cost_center/showconsumerobj',views.showconsumerobj,name='Cost_center/showconsumerobj'),
     url(r'Cost_center/invoice',views.invoice,name='Cost_center/invoice'),
     url(r'Cost_center/showinvoice',views.showinvoice,name='Cost_center/showinvoice'),
+                ## Consumption
+    url(r'showconsumption',views.showconsumption,name='showconsumption'),
 
             ### FOrgot password
     path(r'password_reset/done/', auth_views.PasswordResetDoneView.as_view(template_name='Forgot_password/password_reset_done.html'), name='password_reset_done'),

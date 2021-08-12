@@ -19,11 +19,252 @@ from .models import Consumer,House,InvoiceCostarea
 from .forms import CompanyForm,LocationForm,AreaForm,SmartmeterForm,SmartmeterPortForm,BrandandManufacturerForm
 from .forms import SmartmeterLinkDeviceForm,CostareaForm,HouseForm,ConsumerForm,InvoiceForm
 import random
+import mysql.connector
+from django.db import connection
 
 # Create your views here.
 def index(request):
     print("in index ")
     return HttpResponse('Hello, welcome to the index page.')
+
+def create_table():
+    try:
+        connection = mysql.connector.connect(host='localhost',
+                                             database='ems_database',
+                                             user='adisa',
+                                             password='Adwait_14')
+
+
+        my_sql_create_table_query = "CREATE TABLE Consumption15 (channel_id int(11) NOT NULL DEFAULT -1,"\
+                                    "readingdate DATE NOT NULL DEFAULT 0,"\
+                                    "time_0015 int(11) default 0,time_0030 int(11) default 0,time_0045 int(11) default 0,time_0100 int(11) default 0,"\
+                                    "time_0115 int(11) default 0,time_0130 int(11) default 0,time_0145 int(11) default 0,time_0200 int(11) default 0,"\
+                                    "time_0215 int(11) default 0,time_0230 int(11) default 0,time_0245 int(11) default 0,time_0300 int(11) default 0,"\
+                                    "time_0315 int(11) default 0,time_0330 int(11) default 0,time_0345 int(11) default 0,time_0400 int(11) default 0,"\
+                                    "time_0415 int(11) default 0,time_0430 int(11) default 0,time_0445 int(11) default 0,time_0500 int(11) default 0,"\
+                                    "time_0515 int(11) default 0,time_0530 int(11) default 0,time_0545 int(11) default 0,time_0600 int(11) default 0,"\
+                                    "time_0615 int(11) default 0,time_0630 int(11) default 0,time_0645 int(11) default 0,time_0700 int(11) default 0,"\
+                                    "time_0715 int(11) default 0,time_0730 int(11) default 0,time_0745 int(11) default 0,time_0800 int(11) default 0,"\
+                                    "time_0815 int(11) default 0,time_0830 int(11) default 0,time_0845 int(11) default 0,time_0900 int(11) default 0,"\
+                                    "time_0915 int(11) default 0,time_0930 int(11) default 0,time_0945 int(11) default 0,time_1000 int(11) default 0,"\
+                                    "time_1015 int(11) default 0,time_1030 int(11) default 0,time_1045 int(11) default 0,time_1100 int(11) default 0,"\
+                                    "time_1115 int(11) default 0,time_1130 int(11) default 0,time_1145 int(11) default 0,time_1200 int(11) default 0,"\
+                                    "time_1215 int(11) default 0,time_1230 int(11) default 0,time_1245 int(11) default 0,time_1300 int(11) default 0,"\
+                                    "time_1315 int(11) default 0,time_1330 int(11) default 0,time_1345 int(11) default 0,time_1400 int(11) default 0,"\
+                                    "time_1415 int(11) default 0,time_1430 int(11) default 0,time_1445 int(11) default 0,time_1500 int(11) default 0,"\
+                                    "time_1515 int(11) default 0,time_1530 int(11) default 0,time_1545 int(11) default 0,time_1600 int(11) default 0,"\
+                                    "time_1615 int(11) default 0,time_1630 int(11) default 0,time_1645 int(11) default 0,time_1700 int(11) default 0,"\
+                                    "time_1715 int(11) default 0,time_1730 int(11) default 0,time_1745 int(11) default 0,time_1800 int(11) default 0,"\
+                                    "time_1815 int(11) default 0,time_1830 int(11) default 0,time_1845 int(11) default 0,time_1900 int(11) default 0,"\
+                                    "time_1915 int(11) default 0,time_1930 int(11) default 0,time_1945 int(11) default 0,time_2000 int(11) default 0,"\
+                                    "time_2015 int(11) default 0,time_2030 int(11) default 0,time_2045 int(11) default 0,time_2100 int(11) default 0,"\
+                                    "time_2115 int(11) default 0,time_2130 int(11) default 0,time_2145 int(11) default 0,time_2200 int(11) default 0,"\
+                                    "time_2215 int(11) default 0,time_2230 int(11) default 0,time_2245 int(11) default 0,time_2300 int(11) default 0,"\
+                                    "time_2315 int(11) default 0,time_2330 int(11) default 0,time_2345 int(11) default 0,time_0000 int(11) default 0,"\
+                                    "totalday int(11) default 0,peakvalue int(11) default 0,"\
+                                    "time TIME default 0 ,last_reading int(11) default 0,"\
+                                    "minvalue int(11) default 0,total_reading int(11) NOT NULL default 0,"\
+                                    "PRIMARY KEY  (channel_id,readingdate))"
+        cursor = connection.cursor()
+        #sql = "DROP TABLE IF EXISTS Consumption15"
+        #cursor.execute(sql)
+        cursor.execute("""SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO" """)
+        result = cursor.execute(my_sql_create_table_query)
+        print("Consumption15 Table created successfully ")
+
+    except mysql.connector.Error as error:
+        print("Failed to create table in MySQL: {}".format(error))
+    finally:
+        if connection.is_connected():
+            cursor.close()
+            connection.close()
+            print("MySQL connection is closed")
+
+
+def insert_varibles_into_table(channel_id,readingdate,
+                               tm_0015,tm_0030,tm_0045,tm_0100,tm_0115,tm_0130,tm_0145,tm_0200,tm_0215,tm_0230,tm_0245,tm_0300,
+                               tm_0315,tm_0330,tm_0345,tm_0400,tm_0415,tm_0430,tm_0445,tm_0500,tm_0515,tm_0530,tm_0545,tm_0600,
+                               tm_0615,tm_0630,tm_0645,tm_0700,tm_0715,tm_0730,tm_0745,tm_0800,tm_0815,tm_0830,tm_0845,tm_0900,
+                               tm_0915,tm_0930,tm_0945,tm_1000,tm_1015,tm_1030,tm_1045,tm_1100,tm_1115,tm_1130,tm_1145,tm_1200,
+                               tm_1215,tm_1230,tm_1245,tm_1300,tm_1315,tm_1330,tm_1345,tm_1400,tm_1415,tm_1430,tm_1445,tm_1500,
+                               tm_1515,tm_1530,tm_1545,tm_1600,tm_1615,tm_1630,tm_1645,tm_1700,tm_1715,tm_1730,tm_1745,tm_1800,
+                               tm_1815,tm_1830,tm_1845,tm_1900,tm_1915,tm_1930,tm_1945,tm_2000,tm_2015,tm_2030,tm_2045,tm_2100,
+                               tm_2115,tm_2130,tm_2145,tm_2200,tm_2215,tm_2230,tm_2245,tm_2300,tm_2315,tm_2330,tm_2345,tm_0000,
+                               totalday,peakvalue,time,last_reading,minvalue,total_reading):
+   # print("hello")
+    try:
+        connection = mysql.connector.connect(host='localhost',
+                                             database='ems_database',
+                                             user='adisa',
+                                             password='Adwait_14')
+        cursor = connection.cursor()
+        mySql_insert_query = """INSERT INTO Consumption15 (channel_id,readingdate,time_0015,time_0030,time_0045,time_0100,time_0115,time_0130,time_0145,time_0200,time_0215,time_0230,time_0245,time_0300,
+        time_0315,time_0330,time_0345,time_0400,time_0415,time_0430,time_0445,time_0500,time_0515,time_0530,time_0545,time_0600,
+        time_0615,time_0630,time_0645,time_0700,time_0715,time_0730,time_0745,time_0800,time_0815,time_0830,time_0845,time_0900,
+        time_0915,time_0930,time_0945,time_1000,time_1015,time_1030,time_1045,time_1100,time_1115,time_1130,time_1145,time_1200,
+        time_1215,time_1230,time_1245,time_1300,time_1315,time_1330,time_1345,time_1400,time_1415,time_1430,time_1445,time_1500,
+        time_1515,time_1530,time_1545,time_1600,time_1615,time_1630,time_1645,time_1700,time_1715,time_1730,time_1745,time_1800,
+        time_1815,time_1830,time_1845,time_1900,time_1915,time_1930,time_1945,time_2000,time_2015,time_2030,time_2045,time_2100,
+        time_2115,time_2130,time_2145,time_2200,time_2215,time_2230,time_2245,time_2300,time_2315,time_2330,time_2345,time_0000,
+        totalday,peakvalue,time,last_reading,minvalue,total_reading) 
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s,
+        %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s,
+        %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s,
+        %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s) """
+
+        record = (channel_id,readingdate,tm_0015,tm_0030,tm_0045,tm_0100,tm_0115,tm_0130,tm_0145,tm_0200,tm_0215,tm_0230,tm_0245,tm_0300,
+                               tm_0315,tm_0330,tm_0345,tm_0400,tm_0415,tm_0430,tm_0445,tm_0500,tm_0515,tm_0530,tm_0545,tm_0600,
+                               tm_0615,tm_0630,tm_0645,tm_0700,tm_0715,tm_0730,tm_0745,tm_0800,tm_0815,tm_0830,tm_0845,tm_0900,
+                               tm_0915,tm_0930,tm_0945,tm_1000,tm_1015,tm_1030,tm_1045,tm_1100,tm_1115,tm_1130,tm_1145,tm_1200,
+                               tm_1215,tm_1230,tm_1245,tm_1300,tm_1315,tm_1330,tm_1345,tm_1400,tm_1415,tm_1430,tm_1445,tm_1500,tm_1515,tm_1530,tm_1545,tm_1600,tm_1615,tm_1630,tm_1645,tm_1700,
+                               tm_1715,tm_1730,tm_1745,tm_1800,tm_1815,tm_1830,tm_1845,tm_1900,tm_1915,tm_1930,tm_1945,tm_2000,
+                               tm_2015,tm_2030,tm_2045,tm_2100,tm_2115,tm_2130,tm_2145,tm_2200,tm_2215,tm_2230,tm_2245,tm_2300,
+                               tm_2315,tm_2330,tm_2345,tm_0000,totalday,peakvalue,time,last_reading,minvalue,total_reading)
+
+        cursor.execute(mySql_insert_query, record)
+        connection.commit()
+
+    except mysql.connector.Error as error:
+        print("record failed:",record)
+        print("Failed to insert into MySQL table {}".format(error))
+
+    finally:
+        if connection.is_connected():
+            cursor.close()
+            connection.close()
+        #    print("MySQL connection is closed")
+
+def select_query():
+    try:
+        connection = mysql.connector.connect(host='localhost',
+                                             database='ems_database',
+                                             user='adisa',
+                                             password='Adwait_14')
+
+        sql_select_Query = "select * from Consumption15"
+        cursor = connection.cursor()
+        cursor.execute(sql_select_Query)
+        # get all records
+        records = cursor.fetchall()
+        print("Total number of rows in table: ", cursor.rowcount)
+
+        #print("\nPrinting each row")
+        #for row in records:
+        #    print("channel_Id = ", row[0], )
+        #    print("readingdate = ", row[1])
+        #    print("time_0015 = ", row[2])
+        #    print("time_0030  = ", row[3], "\n")
+
+    except mysql.connector.Error as e:
+        print("Error reading data from MySQL table", e)
+    finally:
+        if connection.is_connected():
+            connection.close()
+            cursor.close()
+            print("MySQL connection is closed")
+
+def txt_to_list(filename):
+    a_file = open(filename, "r")
+    list_of_lists = []
+    for line in a_file:
+        stripped_line = line.strip()
+        line_list = stripped_line.split()
+        list_of_lists.append(line_list)
+
+    a_file.close()
+    #print(list_of_lists)
+    return list_of_lists
+
+def remove_brackets(record):
+    #print("record:",record)
+    #temp_str = str(record)[1:-1]       # get list with square brackets
+    #temp_str2 = str(temp_str).rstrip(',')     # remove end comma
+    #print("temp_str:",temp_str2)
+    for i in record:
+        t1 = str(i).strip()
+        t1_list = t1.split(",")
+        data_array = []
+        opening_bracket = '["'
+        closing_bracket = '"]'
+        for j in t1_list:
+            if opening_bracket in j:
+                j = j.replace('["',"")
+                j = j.replace('(', "")
+            elif closing_bracket in j:
+                j = j.replace('"]',"")
+               # j = j.replace(')', "")
+            elif "(" in j:
+                j = j.replace("(","")
+            elif ")" in j:
+                #print("j:",j)
+                j = j.replace(")","")
+            data_array.append(j)
+            #print(data_array)
+
+    return data_array
+
+def showconsumption(request):
+    create_table()
+    #records_to_insert = txt_to_list('/home/adisa/projects/ems/site_ems/consumption15_2.txt')
+    records_to_insert = txt_to_list('/home/adisa/projects/ems/site_ems/consumption15.txt')
+    print("length of list:", len(records_to_insert))
+    for record in records_to_insert:
+        data_array = remove_brackets(record)
+        # print(data_array)
+        for i in range(0, len(data_array) - 1):
+            quotes = "'"
+            # print("data_array[i]:",data_array[i])
+            if quotes in data_array[i]:
+                data_array[i] = data_array[i].replace("'", "")
+                data_array[i] = data_array[i]
+            else:
+                data_array[i] = int(data_array[i])
+
+        #  print("data array:",data_array,type(data_array))
+        consumption_arr = []
+        consumption_arr = data_array[2:98]
+        peakvalue = max(consumption_arr)
+        minvalue = min(consumption_arr)
+        last_reading = consumption_arr[95]
+        # print("length of consumption arr:",len(consumption_arr))
+        # print("consumption array:",consumption_arr)
+        # print("max:",max(consumption_arr))
+        # print("min:",min(consumption_arr))
+        # print("last reading:",consumption_arr[95])
+        totalday = 0
+        for ele in range(0, len(consumption_arr)):
+            totalday = totalday + consumption_arr[ele]
+        # print("Total of the day:",total)
+        insert_varibles_into_table(data_array[0], data_array[1], data_array[2], data_array[3], data_array[4],
+                                   data_array[5], data_array[6], data_array[7], data_array[8], data_array[9],
+                                   data_array[10], data_array[11], data_array[12], data_array[13], data_array[14],
+                                   data_array[15], data_array[16], data_array[17], data_array[18],
+                                   data_array[19], data_array[20], data_array[21], data_array[22], data_array[23],
+                                   data_array[24], data_array[25], data_array[26], data_array[27],
+                                   data_array[28], data_array[29], data_array[30], data_array[31], data_array[32],
+                                   data_array[33], data_array[34], data_array[35], data_array[36],
+                                   data_array[37], data_array[38], data_array[39], data_array[40], data_array[41],
+                                   data_array[42], data_array[43], data_array[44], data_array[45],
+                                   data_array[46], data_array[47], data_array[48], data_array[49], data_array[50],
+                                   data_array[51], data_array[52], data_array[53], data_array[54],
+                                   data_array[55], data_array[56], data_array[57], data_array[58], data_array[59],
+                                   data_array[60], data_array[61], data_array[62], data_array[63],
+                                   data_array[64], data_array[65], data_array[66], data_array[67], data_array[68],
+                                   data_array[69], data_array[70], data_array[71], data_array[72],
+                                   data_array[73], data_array[74], data_array[75], data_array[76], data_array[77],
+                                   data_array[78], data_array[79], data_array[80], data_array[81],
+                                   data_array[82], data_array[83], data_array[84], data_array[85], data_array[86],
+                                   data_array[87], data_array[88], data_array[89], data_array[90],
+                                   data_array[91], data_array[92], data_array[93], data_array[94], data_array[95],
+                                   data_array[96], data_array[97], totalday, peakvalue,
+                                   data_array[100], last_reading, minvalue, data_array[103])
+    select_query()
+
+    with connection.cursor() as cursor:
+        cursor.execute("SELECT * FROM Consumption15")
+        row = cursor.fetchall()
+    #print("row:",row)
+    return render(request,'showconsumption.html',{'data':row})
 
 def consumption_graph(request):
     randomlist = []

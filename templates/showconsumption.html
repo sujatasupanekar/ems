@@ -1,0 +1,15 @@
+{% extends 'main_content.html' %}
+{% load static %}
+
+{% block main_content_header %}
+    Consumption Details
+{% endblock %}
+
+{% block main_content %}
+
+     <form class="main-content-form">
+        {% csrf_token %}
+         hi
+            {{ data }}
+     </form>
+{% endblock %}

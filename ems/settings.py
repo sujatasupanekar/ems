@@ -77,9 +77,9 @@ WSGI_APPLICATION = 'ems.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME' : 'EMSDatabase',
-        'USER': 'ems_user',
-        'PASSWORD': 'admin_123',
+        'NAME' : 'ems_database',
+        'USER': 'adisa',
+        'PASSWORD': 'Adwait_14',
         'HOST': 'localhost',
         'PORT': '3306',
         'OPTIONS': {
